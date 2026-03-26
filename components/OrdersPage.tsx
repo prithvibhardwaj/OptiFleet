@@ -58,21 +58,33 @@ export default function OrdersPage() {
   }, []);
 
   const loadOrders = async () => {
-    try {
-      setLoading(true);
-      const response = await ordersApi.getAll();
-      if (response.success) {
-        setOrders(response.data || []);
-      } else {
-        console.error('Failed to load orders:', response.error);
-        toast.error('Failed to load orders');
-      }
-    } catch (error) {
-      console.error('Error loading orders:', error);
-      toast.error('Error loading orders');
-    } finally {
-      setLoading(false);
-    }
+    setLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 700));
+    setOrders([
+      { id: 'ORD-001', customer: 'Ace Pest Control HQ', pickup: '123 Clementi Ave 3', dropoff: '456 Ang Mo Kio St 21', window: '09:00 - 11:00', weight: '12kg', status: 'assigned' },
+      { id: 'ORD-002', customer: 'Clean Pro Services', pickup: '789 Jurong West St 52', dropoff: '321 Bedok North Ave 1', window: '10:00 - 12:00', weight: '8kg', status: 'assigned' },
+      { id: 'ORD-003', customer: 'Fresh Laundry Co', pickup: '234 Tampines St 21', dropoff: '567 Yishun Ring Rd', window: '13:00 - 15:00', weight: '15kg', status: 'pending' },
+      { id: 'ORD-004', customer: 'BuildMaster Supplies', pickup: '890 Woodlands Ave 6', dropoff: '432 Pasir Ris Dr 3', window: '08:00 - 10:00', weight: '45kg', status: 'assigned' },
+      { id: 'ORD-005', customer: 'Premium Catering Pte Ltd', pickup: '567 Serangoon North Ave 1', dropoff: '234 Marine Parade Rd', window: '11:00 - 13:00', weight: '22kg', status: 'assigned' },
+      { id: 'ORD-006', customer: 'CoolAir Servicing', pickup: '345 Hougang Ave 8', dropoff: '678 Bukit Batok West Ave 6', window: '14:00 - 16:00', weight: '18kg', status: 'pending' },
+      { id: 'ORD-007', customer: 'SwiftClean Solutions', pickup: '102 Bishan St 12', dropoff: '88 Commonwealth Crescent', window: '09:30 - 11:30', weight: '9kg', status: 'pending' },
+      { id: 'ORD-008', customer: 'ProGarden Landscaping', pickup: '5 Toh Guan Rd East', dropoff: '20 Lorong 8 Toa Payoh', window: '08:00 - 09:30', weight: '38kg', status: 'assigned' },
+      { id: 'ORD-009', customer: 'Lakeside Catering', pickup: '30 Jurong Port Rd', dropoff: '14 Ghim Moh Rd', window: '06:00 - 08:00', weight: '60kg', status: 'assigned' },
+      { id: 'ORD-010', customer: 'TechFix IT Services', pickup: '1 Fusionopolis Way', dropoff: '10 Anson Rd', window: '10:00 - 12:00', weight: '5kg', status: 'pending' },
+      { id: 'ORD-011', customer: 'MediSupply SG', pickup: '110 Toa Payoh Lorong 1', dropoff: '3 Hospital Dr', window: '07:00 - 08:00', weight: '25kg', status: 'assigned' },
+      { id: 'ORD-012', customer: 'Eco Waste Management', pickup: '31 Tuas Ave 1', dropoff: '50 Changi South Ave 1', window: '07:30 - 09:30', weight: '120kg', status: 'assigned' },
+      { id: 'ORD-013', customer: 'NovaBake Confectionery', pickup: '9 Joo Koon Circle', dropoff: '15 Bukit Timah Rd', window: '05:00 - 07:00', weight: '30kg', status: 'assigned' },
+      { id: 'ORD-014', customer: 'HomeDecor Express', pickup: '22 Sin Ming Lane', dropoff: '33 Tanjong Pagar Plaza', window: '12:00 - 14:00', weight: '55kg', status: 'pending' },
+      { id: 'ORD-015', customer: 'FreshMart Grocers', pickup: '40 Pandan Loop', dropoff: '82 Tiong Bahru Rd', window: '04:00 - 06:00', weight: '75kg', status: 'assigned' },
+      { id: 'ORD-016', customer: 'SkyHigh Events', pickup: '6 Raffles Blvd', dropoff: '1 Harbourfront Walk', window: '15:00 - 17:00', weight: '40kg', status: 'pending' },
+      { id: 'ORD-017', customer: 'Bedok Aircon Services', pickup: '418 Bedok North Ave 2', dropoff: '201 Tampines St 21', window: '11:00 - 13:00', weight: '20kg', status: 'pending' },
+      { id: 'ORD-018', customer: 'Punggol Hardware', pickup: '5 Punggol Field', dropoff: '70 Jurong West Ave 1', window: '08:30 - 10:00', weight: '85kg', status: 'assigned' },
+      { id: 'ORD-019', customer: 'StarChef Catering', pickup: '11 Woodlands Close', dropoff: '22 Upper Serangoon Rd', window: '05:30 - 07:30', weight: '48kg', status: 'assigned' },
+      { id: 'ORD-020', customer: 'IslandMove Logistics', pickup: '36 Kranji Loop', dropoff: '9 Changi North Way', window: '09:00 - 11:00', weight: '200kg', status: 'pending' },
+      { id: 'ORD-021', customer: 'SunShine Florist', pickup: '4 Queensway', dropoff: '121 Orchard Rd', window: '06:00 - 08:00', weight: '6kg', status: 'pending' },
+      { id: 'ORD-022', customer: 'NightOwl Pharmacy', pickup: '30 Biopolis St', dropoff: '298 Tiong Bahru Rd', window: '22:00 - 23:00', weight: '8kg', status: 'pending' },
+    ]);
+    setLoading(false);
   };
 
   const handleAddOrder = async () => {

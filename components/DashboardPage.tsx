@@ -29,25 +29,50 @@ export default function DashboardPage() {
   }, []);
 
   const loadData = async () => {
-    try {
-      setLoading(true);
-      const [vehiclesRes, ordersRes] = await Promise.all([
-        vehiclesApi.getAll(),
-        ordersApi.getAll(),
-      ]);
+    setLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 800));
 
-      if (vehiclesRes.success) {
-        setVehicles(vehiclesRes.data || []);
-      }
-      if (ordersRes.success) {
-        setOrders(ordersRes.data || []);
-      }
-    } catch (error) {
-      console.error('Error loading dashboard data:', error);
-      toast.error('Failed to load dashboard data');
-    } finally {
-      setLoading(false);
-    }
+    setVehicles([
+      { id: 'V001', name: 'Vehicle 1', plate: 'SBD 1234 A', type: 'Van', driver: 'John Lim', status: 'en-route', lat: 1.3521, lng: 103.8198, stops: 5 },
+      { id: 'V002', name: 'Vehicle 2', plate: 'SBD 5678 B', type: 'Van', driver: 'Sarah Tan', status: 'en-route', lat: 1.3321, lng: 103.8598, stops: 5 },
+      { id: 'V003', name: 'Vehicle 3', plate: 'SBD 9012 C', type: 'Truck', driver: 'Mike Chen', status: 'idle', lat: 1.3721, lng: 103.8898, stops: 0 },
+      { id: 'V004', name: 'Vehicle 4', plate: 'SBD 3456 D', type: 'Van', driver: 'Amy Wong', status: 'en-route', lat: 1.3121, lng: 103.8398, stops: 5 },
+      { id: 'V005', name: 'Vehicle 5', plate: 'SBD 7890 E', type: 'Van', driver: 'David Ng', status: 'done', lat: 1.3421, lng: 103.8698, stops: 0 },
+      { id: 'V006', name: 'Vehicle 6', plate: 'SBD 2345 F', type: 'Van', driver: 'Lisa Koh', status: 'en-route', lat: 1.3621, lng: 103.8298, stops: 4 },
+      { id: 'V007', name: 'Vehicle 7', plate: 'SBD 6789 G', type: 'Truck', driver: 'Tom Lee', status: 'done', lat: 1.3221, lng: 103.8498, stops: 0 },
+      { id: 'V008', name: 'Vehicle 8', plate: 'SBD 0123 H', type: 'Van', driver: 'Jane Sim', status: 'en-route', lat: 1.3821, lng: 103.8798, stops: 5 },
+      { id: 'V009', name: 'Vehicle 9', plate: 'SBD 4567 J', type: 'Van', driver: 'Kevin Tay', status: 'en-route', lat: 1.3281, lng: 103.8451, stops: 5 },
+      { id: 'V010', name: 'Vehicle 10', plate: 'SBD 8901 K', type: 'Truck', driver: 'Priya Nair', status: 'idle', lat: 1.3651, lng: 103.8751, stops: 0 },
+      { id: 'V011', name: 'Vehicle 11', plate: 'SBD 2468 L', type: 'Van', driver: 'Raymond Ong', status: 'en-route', lat: 1.3411, lng: 103.8211, stops: 4 },
+      { id: 'V012', name: 'Vehicle 12', plate: 'SBD 1357 M', type: 'Van', driver: 'Mei Lin', status: 'done', lat: 1.3561, lng: 103.8631, stops: 0 },
+    ]);
+
+    setOrders([
+      { id: 'ORD-001', customer: 'Ace Pest Control HQ', status: 'assigned' },
+      { id: 'ORD-002', customer: 'Clean Pro Services', status: 'assigned' },
+      { id: 'ORD-003', customer: 'Fresh Laundry Co', status: 'pending' },
+      { id: 'ORD-004', customer: 'BuildMaster Supplies', status: 'assigned' },
+      { id: 'ORD-005', customer: 'Premium Catering Pte Ltd', status: 'assigned' },
+      { id: 'ORD-006', customer: 'CoolAir Servicing', status: 'pending' },
+      { id: 'ORD-007', customer: 'SwiftClean Solutions', status: 'pending' },
+      { id: 'ORD-008', customer: 'ProGarden Landscaping', status: 'assigned' },
+      { id: 'ORD-009', customer: 'Lakeside Catering', status: 'assigned' },
+      { id: 'ORD-010', customer: 'TechFix IT Services', status: 'pending' },
+      { id: 'ORD-011', customer: 'MediSupply SG', status: 'assigned' },
+      { id: 'ORD-012', customer: 'Eco Waste Management', status: 'assigned' },
+      { id: 'ORD-013', customer: 'NovaBake Confectionery', status: 'assigned' },
+      { id: 'ORD-014', customer: 'HomeDecor Express', status: 'pending' },
+      { id: 'ORD-015', customer: 'FreshMart Grocers', status: 'assigned' },
+      { id: 'ORD-016', customer: 'SkyHigh Events', status: 'pending' },
+      { id: 'ORD-017', customer: 'Bedok Aircon Services', status: 'pending' },
+      { id: 'ORD-018', customer: 'Punggol Hardware', status: 'assigned' },
+      { id: 'ORD-019', customer: 'StarChef Catering', status: 'assigned' },
+      { id: 'ORD-020', customer: 'IslandMove Logistics', status: 'pending' },
+      { id: 'ORD-021', customer: 'SunShine Florist', status: 'pending' },
+      { id: 'ORD-022', customer: 'NightOwl Pharmacy', status: 'pending' },
+    ]);
+
+    setLoading(false);
   };
   const getStatusColor = (status: string) => {
     switch (status) {
