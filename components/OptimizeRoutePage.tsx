@@ -129,12 +129,12 @@ function formatDuration(minutes: number): string {
 
 export default function OptimizeRoutePage() {
   const [locations, setLocations] = useState<Location[]>([
-    { id: '1', address: '123 Clementi Ave 3', type: 'pickup', notes: 'Pest control equipment', timeWindow: '09:00 AM - 10:00 AM' },
-    { id: '2', address: '456 Ang Mo Kio St 21', type: 'delivery', notes: 'Cleaning supplies, 8kg', timeWindow: '10:30 AM - 11:30 AM' },
-    { id: '3', address: '789 Bedok North Ave 1', type: 'delivery', notes: 'Laundry chemicals', timeWindow: '12:00 PM - 13:00 PM' },
-    { id: '4', address: '567 Serangoon North Ave 1', type: 'service', notes: 'Catering drop-off, 22kg', timeWindow: '13:30 PM - 14:30 PM' },
-    { id: '5', address: '345 Hougang Ave 8', type: 'delivery', notes: 'Aircon parts delivery', timeWindow: '15:00 PM - 16:00 PM' },
-    { id: '6', address: '234 Tampines St 21', type: 'pickup', notes: 'Construction materials return', timeWindow: '16:30 PM - 17:30 PM' },
+    { id: '1', address: '234 Tampines St 21', type: 'pickup', notes: 'Construction materials return', timeWindow: '09:00 AM - 10:00 AM' },
+    { id: '2', address: '123 Clementi Ave 3', type: 'pickup', notes: 'Pest control equipment', timeWindow: '10:30 AM - 11:30 AM' },
+    { id: '3', address: '345 Hougang Ave 8', type: 'delivery', notes: 'Aircon parts delivery', timeWindow: '09:30 AM - 10:30 AM' },
+    { id: '4', address: '456 Ang Mo Kio St 21', type: 'delivery', notes: 'Cleaning supplies, 8kg', timeWindow: '13:30 PM - 14:30 PM' },
+    { id: '5', address: '789 Bedok North Ave 1', type: 'delivery', notes: 'Laundry chemicals', timeWindow: '11:00 AM - 12:00 PM' },
+    { id: '6', address: '567 Serangoon North Ave 1', type: 'service', notes: 'Catering drop-off, 22kg', timeWindow: '15:00 PM - 16:00 PM' },
   ]);
   const [startLocation, setStartLocation] = useState('10 Tuas Ave 2, OptiFleet Depot');
   const [endLocation, setEndLocation] = useState('10 Tuas Ave 2, OptiFleet Depot');
