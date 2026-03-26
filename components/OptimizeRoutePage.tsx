@@ -19,8 +19,6 @@ import {
   CheckCircle2,
   Calendar,
   Route,
-  Users,
-  Package,
 } from 'lucide-react';
 import { SidebarTrigger } from './ui/sidebar';
 import { toast } from 'sonner';

@@ -164,7 +164,7 @@ export default function ReportsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {monthlyData.map((data, index) => (
+                  {monthlyData.map((data) => (
                     <tr key={data.month} className="border-b border-border hover:bg-gray-50">
                       <td className="py-4 px-4">{data.month}</td>
                       <td className="py-4 px-4">{data.co2} kg</td>

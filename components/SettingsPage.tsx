@@ -6,7 +6,6 @@ import { Label } from './ui/label';
 import { Badge } from './ui/badge';
 import { Switch } from './ui/switch';
 import {
-  Settings,
   Building2,
   Truck,
   Users,

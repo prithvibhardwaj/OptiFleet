@@ -19,7 +19,6 @@ import {
   BarChart3,
   FileText,
   Settings,
-  Truck,
   LogOut,
 } from 'lucide-react';
 import { Avatar, AvatarFallback } from './ui/avatar';

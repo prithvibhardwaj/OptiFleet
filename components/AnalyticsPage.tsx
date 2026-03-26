@@ -14,7 +14,6 @@ import {
   Target,
 } from 'lucide-react';
 import { SidebarTrigger } from './ui/sidebar';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import {
   LineChart,
   Line,

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
-import { Progress } from './ui/progress';
 import {
   Truck,
   Package,
@@ -209,7 +208,7 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Vehicle Markers */}
-                {vehicles.map((vehicle, idx) => (
+                {vehicles.map((vehicle, _idx) => (
                   <div
                     key={vehicle.id}
                     className="absolute group cursor-pointer"
