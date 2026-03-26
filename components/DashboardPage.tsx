@@ -159,7 +159,7 @@ export default function DashboardPage() {
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Fuel Cost Saved</p>
-                  <h3 className="text-3xl mb-1">$248</h3>
+                  <h3 className="text-3xl mb-1">$312</h3>
                   <p className="text-xs text-muted-foreground">Today</p>
                 </div>
                 <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
@@ -174,8 +174,8 @@ export default function DashboardPage() {
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">CO₂ Saved</p>
-                  <h3 className="text-3xl mb-1">47kg</h3>
-                  <p className="text-xs text-muted-foreground">≈ 2 trees planted</p>
+                  <h3 className="text-3xl mb-1">63kg</h3>
+                  <p className="text-xs text-muted-foreground">≈ 3 trees planted</p>
                 </div>
                 <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
                   <Leaf className="w-6 h-6 text-emerald-600" />

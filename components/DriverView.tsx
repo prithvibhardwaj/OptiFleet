@@ -23,44 +23,54 @@ const driverTasks = [
     contact: '+65 9123 4567',
     eta: '09:15 AM',
     status: 'completed',
-    notes: 'Equipment delivery - signed by Mr. Tan',
+    notes: 'Equipment delivery - signed by Mr. Tan at reception',
     completedAt: '09:10 AM',
   },
   {
     id: 2,
-    customer: 'Clean Services',
-    address: '456 Ang Mo Kio St 21, Block 456, Singapore 560456',
-    contact: '+65 9234 5678',
-    eta: '10:30 AM',
-    status: 'in-progress',
-    notes: 'Laundry pickup - 15kg',
-    distance: '2.3 km',
+    customer: 'SwiftClean Solutions',
+    address: '88 Commonwealth Crescent, #01-08, Singapore 149520',
+    contact: '+65 9871 2345',
+    eta: '10:05 AM',
+    status: 'completed',
+    notes: 'Cleaning supplies pickup - 9kg, collect signed DO',
+    completedAt: '09:58 AM',
   },
   {
     id: 3,
-    customer: 'Fresh Laundry',
-    address: '789 Bedok North Ave 1, #02-34, Singapore 460789',
-    contact: '+65 9345 6789',
-    eta: '11:45 AM',
-    status: 'pending',
-    notes: 'Chemical supplies delivery',
-    distance: '5.8 km',
+    customer: 'Clean Pro Services',
+    address: '456 Ang Mo Kio St 21, Block 456, Singapore 560456',
+    contact: '+65 9234 5678',
+    eta: '11:10 AM',
+    status: 'in-progress',
+    notes: 'Laundry chemicals delivery - 8kg. Ask for Ms. Rachel at loading bay.',
+    distance: '3.1 km',
   },
   {
     id: 4,
+    customer: 'Fresh Laundry Co',
+    address: '789 Bedok North Ave 1, #02-34, Singapore 460789',
+    contact: '+65 9345 6789',
+    eta: '12:25 PM',
+    status: 'pending',
+    notes: 'Bulk laundry bags pickup - 15kg. Call ahead 10 min before arrival.',
+    distance: '6.4 km',
+  },
+  {
+    id: 5,
     customer: 'BuildMaster Supplies',
     address: '234 Tampines St 21, Singapore 520234',
     contact: '+65 9456 7890',
-    eta: '13:00 PM',
+    eta: '13:40 PM',
     status: 'pending',
-    notes: 'Construction materials - handle with care',
-    distance: '8.4 km',
+    notes: 'Heavy construction materials - use loading ramp at back. Handle with care.',
+    distance: '9.2 km',
   },
 ];
 
 export default function DriverView() {
   const [tasks, setTasks] = useState(driverTasks);
-  const [currentTaskIndex, setCurrentTaskIndex] = useState(1); // Currently on task 2
+  const [currentTaskIndex, setCurrentTaskIndex] = useState(2); // Currently on task 3
 
   const markAsCompleted = (taskId: number) => {
     setTasks(tasks.map(task => 

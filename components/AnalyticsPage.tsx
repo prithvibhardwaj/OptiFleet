@@ -31,40 +31,44 @@ import {
 } from 'recharts';
 
 const fuelData = [
-  { month: 'Apr', fuel: 2400, saved: 320 },
-  { month: 'May', fuel: 2210, saved: 450 },
-  { month: 'Jun', fuel: 2050, saved: 590 },
-  { month: 'Jul', fuel: 1980, saved: 640 },
-  { month: 'Aug', fuel: 1850, saved: 710 },
-  { month: 'Sep', fuel: 1720, saved: 780 },
-  { month: 'Oct', fuel: 1650, saved: 850 },
+  { month: 'Mar', fuel: 2580, saved: 290 },
+  { month: 'Apr', fuel: 2400, saved: 380 },
+  { month: 'May', fuel: 2210, saved: 510 },
+  { month: 'Jun', fuel: 2050, saved: 630 },
+  { month: 'Jul', fuel: 1980, saved: 710 },
+  { month: 'Aug', fuel: 1850, saved: 790 },
+  { month: 'Sep', fuel: 1720, saved: 860 },
+  { month: 'Oct', fuel: 1590, saved: 940 },
 ];
 
 const routeTimeData = [
-  { day: 'Mon', avgTime: 42, target: 45 },
-  { day: 'Tue', avgTime: 38, target: 45 },
-  { day: 'Wed', avgTime: 44, target: 45 },
-  { day: 'Thu', avgTime: 40, target: 45 },
-  { day: 'Fri', avgTime: 36, target: 45 },
-  { day: 'Sat', avgTime: 41, target: 45 },
-  { day: 'Sun', avgTime: 39, target: 45 },
+  { day: 'Mon', avgTime: 41, target: 45 },
+  { day: 'Tue', avgTime: 37, target: 45 },
+  { day: 'Wed', avgTime: 43, target: 45 },
+  { day: 'Thu', avgTime: 39, target: 45 },
+  { day: 'Fri', avgTime: 35, target: 45 },
+  { day: 'Sat', avgTime: 40, target: 45 },
+  { day: 'Sun', avgTime: 38, target: 45 },
 ];
 
 const vehiclePerformance = [
-  { name: 'V001 - John Lim', deliveries: 324, onTime: 98, efficiency: 96 },
-  { name: 'V002 - Sarah Tan', deliveries: 312, onTime: 97, efficiency: 94 },
-  { name: 'V004 - Amy Wong', deliveries: 298, onTime: 96, efficiency: 92 },
-  { name: 'V006 - Lisa Koh', deliveries: 287, onTime: 95, efficiency: 91 },
-  { name: 'V008 - Jane Sim', deliveries: 276, onTime: 94, efficiency: 89 },
+  { name: 'V001 - John Lim', deliveries: 412, onTime: 99, efficiency: 97 },
+  { name: 'V002 - Sarah Tan', deliveries: 394, onTime: 98, efficiency: 96 },
+  { name: 'V006 - Lisa Koh', deliveries: 378, onTime: 97, efficiency: 94 },
+  { name: 'V004 - Amy Wong', deliveries: 361, onTime: 96, efficiency: 93 },
+  { name: 'V009 - Kevin Tay', deliveries: 344, onTime: 96, efficiency: 92 },
+  { name: 'V011 - Raymond Ong', deliveries: 328, onTime: 95, efficiency: 91 },
+  { name: 'V008 - Jane Sim', deliveries: 315, onTime: 94, efficiency: 90 },
 ];
 
 const routeDistribution = [
-  { name: 'Pest Control', value: 28, color: '#3b82f6' },
-  { name: 'Laundry', value: 22, color: '#8b5cf6' },
-  { name: 'Cleaning', value: 18, color: '#ec4899' },
-  { name: 'Construction', value: 15, color: '#f59e0b' },
-  { name: 'Catering', value: 12, color: '#10b981' },
-  { name: 'Others', value: 5, color: '#6b7280' },
+  { name: 'Pest Control', value: 24, color: '#3b82f6' },
+  { name: 'Catering', value: 21, color: '#10b981' },
+  { name: 'Laundry', value: 18, color: '#8b5cf6' },
+  { name: 'Construction', value: 16, color: '#f59e0b' },
+  { name: 'Cleaning', value: 13, color: '#ec4899' },
+  { name: 'Healthcare', value: 5, color: '#ef4444' },
+  { name: 'Others', value: 3, color: '#6b7280' },
 ];
 
 export default function AnalyticsPage() {
@@ -105,10 +109,10 @@ export default function AnalyticsPage() {
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Total Distance</p>
-                  <h3 className="text-3xl mb-1">1,247 km</h3>
+                  <h3 className="text-3xl mb-1">1,834 km</h3>
                   <p className="text-xs text-green-600 flex items-center gap-1">
                     <TrendingDown className="w-3 h-3" />
-                    -12% vs last month
+                    -14% vs last month
                   </p>
                 </div>
                 <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -123,10 +127,10 @@ export default function AnalyticsPage() {
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Avg. Delivery Time</p>
-                  <h3 className="text-3xl mb-1">42 min</h3>
+                  <h3 className="text-3xl mb-1">39 min</h3>
                   <p className="text-xs text-green-600 flex items-center gap-1">
                     <TrendingDown className="w-3 h-3" />
-                    -8% improvement
+                    -13% improvement
                   </p>
                 </div>
                 <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
@@ -141,10 +145,10 @@ export default function AnalyticsPage() {
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">Fuel Saved (Month)</p>
-                  <h3 className="text-3xl mb-1">$612</h3>
+                  <h3 className="text-3xl mb-1">$940</h3>
                   <p className="text-xs text-green-600 flex items-center gap-1">
                     <TrendingUp className="w-3 h-3" />
-                    +15% vs last month
+                    +19% vs last month
                   </p>
                 </div>
                 <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
@@ -159,8 +163,8 @@ export default function AnalyticsPage() {
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">CO₂ Reduced</p>
-                  <h3 className="text-3xl mb-1">310 kg</h3>
-                  <p className="text-xs text-muted-foreground">≈ 14 trees planted</p>
+                  <h3 className="text-3xl mb-1">487 kg</h3>
+                  <p className="text-xs text-muted-foreground">≈ 22 trees planted</p>
                 </div>
                 <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
                   <Leaf className="w-6 h-6 text-emerald-600" />
@@ -331,7 +335,7 @@ export default function AnalyticsPage() {
                 <div>
                   <h4 className="mb-1 text-blue-900">Efficiency Improved</h4>
                   <p className="text-sm text-blue-700">
-                    Routes are 18% more efficient compared to last month
+                    Routes are 22% more efficient compared to last month
                   </p>
                 </div>
               </div>
@@ -363,7 +367,7 @@ export default function AnalyticsPage() {
                 <div>
                   <h4 className="mb-1 text-amber-900">Cost Savings</h4>
                   <p className="text-sm text-amber-700">
-                    $612 saved in fuel costs this month through optimization
+                    $940 saved in fuel costs this month through optimization
                   </p>
                 </div>
               </div>

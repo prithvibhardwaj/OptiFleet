@@ -14,20 +14,20 @@ import {
 import { SidebarTrigger } from './ui/sidebar';
 
 const esgMetrics = [
-  { label: 'Total CO₂ Saved', value: '1,847 kg', change: '+23%', icon: Leaf, color: 'emerald' },
-  { label: 'Distance Reduced', value: '486 km', change: '+18%', icon: TrendingDown, color: 'blue' },
-  { label: 'Fuel Saved', value: '342 L', change: '+21%', icon: Target, color: 'amber' },
-  { label: 'Trees Equivalent', value: '84 trees', change: '+23%', icon: Award, color: 'green' },
+  { label: 'Total CO₂ Saved', value: '3,124 kg', change: '+31%', icon: Leaf, color: 'emerald' },
+  { label: 'Distance Reduced', value: '847 km', change: '+27%', icon: TrendingDown, color: 'blue' },
+  { label: 'Fuel Saved', value: '594 L', change: '+29%', icon: Target, color: 'amber' },
+  { label: 'Trees Equivalent', value: '142 trees', change: '+31%', icon: Award, color: 'green' },
 ];
 
 const monthlyData = [
-  { month: 'April 2025', co2: 245, distance: 65, fuel: 45 },
-  { month: 'May 2025', co2: 268, distance: 71, fuel: 51 },
-  { month: 'June 2025', co2: 289, distance: 76, fuel: 54 },
-  { month: 'July 2025', co2: 302, distance: 79, fuel: 57 },
-  { month: 'August 2025', co2: 321, distance: 84, fuel: 60 },
   { month: 'September 2025', co2: 334, distance: 87, fuel: 62 },
-  { month: 'October 2025', co2: 310, distance: 81, fuel: 58 },
+  { month: 'October 2025', co2: 368, distance: 96, fuel: 68 },
+  { month: 'November 2025', co2: 401, distance: 105, fuel: 74 },
+  { month: 'December 2025', co2: 387, distance: 101, fuel: 71 },
+  { month: 'January 2026', co2: 432, distance: 112, fuel: 79 },
+  { month: 'February 2026', co2: 574, distance: 149, fuel: 105 },
+  { month: 'March 2026', co2: 628, distance: 197, fuel: 135 },
 ];
 
 const certifications = [
@@ -87,7 +87,7 @@ export default function ReportsPage() {
                     <Leaf className="w-6 h-6 text-white" />
                   </div>
                   <Badge className="bg-white/20 text-white hover:bg-white/20 border-white/30">
-                    Q3 2025 Report
+                    H2 2025 — Q1 2026 Report
                   </Badge>
                 </div>
                 <h2 className="text-3xl mb-2">Sustainability Impact Report</h2>
@@ -97,12 +97,12 @@ export default function ReportsPage() {
                 <div className="flex items-center gap-6 mt-6">
                   <div>
                     <p className="text-green-100 text-sm">Report Period</p>
-                    <p className="text-xl">Apr - Oct 2025</p>
+                    <p className="text-xl">Sep 2025 — Mar 2026</p>
                   </div>
                   <div className="h-8 w-px bg-white/30"></div>
                   <div>
                     <p className="text-green-100 text-sm">Generated</p>
-                    <p className="text-xl">11 Oct 2025</p>
+                    <p className="text-xl">26 Mar 2026</p>
                   </div>
                 </div>
               </div>
@@ -184,7 +184,7 @@ export default function ReportsPage() {
 
             <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
               <p className="text-sm text-blue-900">
-                <strong>Total for Period:</strong> 1,847 kg CO₂ saved • 486 km reduced • 342 L fuel saved
+                <strong>Total for Period:</strong> 3,124 kg CO₂ saved • 847 km reduced • 594 L fuel saved
               </p>
             </div>
           </CardContent>

@@ -38,24 +38,42 @@ import {
 const vehicles = [
   { id: 'V001', plate: 'SBD 1234 A', type: 'Van', driver: 'John Lim', status: 'active' },
   { id: 'V002', plate: 'SBD 5678 B', type: 'Van', driver: 'Sarah Tan', status: 'active' },
-  { id: 'V003', plate: 'SBD 9012 C', type: 'Truck', driver: 'Unassigned', status: 'inactive' },
+  { id: 'V003', plate: 'SBD 9012 C', type: 'Truck', driver: 'Mike Chen', status: 'active' },
   { id: 'V004', plate: 'SBD 3456 D', type: 'Van', driver: 'Amy Wong', status: 'active' },
+  { id: 'V005', plate: 'SBD 7890 E', type: 'Van', driver: 'David Ng', status: 'active' },
+  { id: 'V006', plate: 'SBD 2345 F', type: 'Van', driver: 'Lisa Koh', status: 'active' },
+  { id: 'V007', plate: 'SBD 6789 G', type: 'Truck', driver: 'Tom Lee', status: 'active' },
+  { id: 'V008', plate: 'SBD 0123 H', type: 'Van', driver: 'Jane Sim', status: 'active' },
+  { id: 'V009', plate: 'SBD 4567 J', type: 'Van', driver: 'Kevin Tay', status: 'active' },
+  { id: 'V010', plate: 'SBD 8901 K', type: 'Truck', driver: 'Priya Nair', status: 'active' },
+  { id: 'V011', plate: 'SBD 2468 L', type: 'Van', driver: 'Raymond Ong', status: 'active' },
+  { id: 'V012', plate: 'SBD 1357 M', type: 'Van', driver: 'Mei Lin', status: 'inactive' },
 ];
 
 const drivers = [
   { id: 'D001', name: 'John Lim', email: 'john@optifleet.sg', phone: '+65 9123 4567', vehicle: 'V001', status: 'active' },
   { id: 'D002', name: 'Sarah Tan', email: 'sarah@optifleet.sg', phone: '+65 9234 5678', vehicle: 'V002', status: 'active' },
-  { id: 'D003', name: 'Amy Wong', email: 'amy@optifleet.sg', phone: '+65 9345 6789', vehicle: 'V004', status: 'active' },
-  { id: 'D004', name: 'Mike Chen', email: 'mike@optifleet.sg', phone: '+65 9456 7890', vehicle: null, status: 'inactive' },
+  { id: 'D003', name: 'Mike Chen', email: 'mike@optifleet.sg', phone: '+65 9345 6789', vehicle: 'V003', status: 'active' },
+  { id: 'D004', name: 'Amy Wong', email: 'amy@optifleet.sg', phone: '+65 9456 7890', vehicle: 'V004', status: 'active' },
+  { id: 'D005', name: 'David Ng', email: 'david@optifleet.sg', phone: '+65 9567 8901', vehicle: 'V005', status: 'active' },
+  { id: 'D006', name: 'Lisa Koh', email: 'lisa@optifleet.sg', phone: '+65 9678 9012', vehicle: 'V006', status: 'active' },
+  { id: 'D007', name: 'Tom Lee', email: 'tom@optifleet.sg', phone: '+65 9789 0123', vehicle: 'V007', status: 'active' },
+  { id: 'D008', name: 'Jane Sim', email: 'jane@optifleet.sg', phone: '+65 9890 1234', vehicle: 'V008', status: 'active' },
+  { id: 'D009', name: 'Kevin Tay', email: 'kevin@optifleet.sg', phone: '+65 9901 2345', vehicle: 'V009', status: 'active' },
+  { id: 'D010', name: 'Priya Nair', email: 'priya@optifleet.sg', phone: '+65 9012 3456', vehicle: 'V010', status: 'active' },
+  { id: 'D011', name: 'Raymond Ong', email: 'raymond@optifleet.sg', phone: '+65 9113 2244', vehicle: 'V011', status: 'active' },
+  { id: 'D012', name: 'Mei Lin', email: 'meilin@optifleet.sg', phone: '+65 9224 3355', vehicle: null, status: 'inactive' },
 ];
 
 const integrations = [
-  { name: 'Xero Accounting', description: 'Sync invoices and expenses', status: 'connected', icon: '💰' },
+  { name: 'Xero Accounting', description: 'Sync invoices and expenses automatically', status: 'connected', icon: '💰' },
+  { name: 'Google Maps API', description: 'Advanced routing and geocoding', status: 'connected', icon: '🗺️' },
+  { name: 'Slack Notifications', description: 'Real-time team alerts and updates', status: 'connected', icon: '💬' },
   { name: 'QuickBooks', description: 'Financial management integration', status: 'available', icon: '📊' },
-  { name: 'POS System', description: 'Auto-import orders from POS', status: 'available', icon: '🛒' },
-  { name: 'Google Maps API', description: 'Advanced routing capabilities', status: 'connected', icon: '🗺️' },
-  { name: 'Slack Notifications', description: 'Team communication alerts', status: 'available', icon: '💬' },
-  { name: 'Government Grant Portal', description: 'EnterpriseSG integration', status: 'available', icon: '🏛️' },
+  { name: 'POS System', description: 'Auto-import orders from POS terminals', status: 'available', icon: '🛒' },
+  { name: 'EnterpriseSG Portal', description: 'Grant applications and compliance', status: 'available', icon: '🏛️' },
+  { name: 'Stripe Payments', description: 'Accept payments from customers', status: 'available', icon: '💳' },
+  { name: 'WhatsApp Business', description: 'Customer delivery notifications via WhatsApp', status: 'available', icon: '📱' },
 ];
 
 export default function SettingsPage() {
