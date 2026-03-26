@@ -36,7 +36,7 @@ import {
 import { Textarea } from './ui/textarea';
 import { ordersApi } from '../utils/api';
 import { parseCSV, validateOrder, detectDuplicates, generateCSVTemplate, downloadCSV } from '../utils/csvParser';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState<any[]>([]);

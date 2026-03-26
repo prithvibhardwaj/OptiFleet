@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { SidebarTrigger } from './ui/sidebar';
 import { vehiclesApi, ordersApi } from '../utils/api';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 export default function DashboardPage() {
   const [vehicles, setVehicles] = useState<any[]>([]);
