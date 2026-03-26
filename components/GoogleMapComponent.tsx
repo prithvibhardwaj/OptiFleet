@@ -174,29 +174,25 @@ export default function GoogleMapComponent({
     }
   };
 
-  if (loading) {
-    return (
-      <div className={`${className} flex items-center justify-center bg-gray-100`}>
-        <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-blue-600" />
-          <p className="text-sm text-muted-foreground">Loading map...</p>
+  return (
+    <div className={`${className} relative`}>
+      <div ref={mapRef} className="w-full h-full" />
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+          <div className="text-center">
+            <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-blue-600" />
+            <p className="text-sm text-muted-foreground">Loading map...</p>
+          </div>
         </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={`${className} flex items-center justify-center bg-gray-100`}>
-        <div className="text-center p-6">
-          <p className="text-sm text-red-600 mb-2">{error}</p>
-          <p className="text-xs text-muted-foreground">
-            Please add your Google Maps API key in the environment variables
-          </p>
+      )}
+      {error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+          <div className="text-center p-6">
+            <p className="text-sm text-red-600 mb-2">{error}</p>
+            <p className="text-xs text-muted-foreground">Please check your Google Maps API key</p>
+          </div>
         </div>
-      </div>
-    );
-  }
-
-  return <div ref={mapRef} className={className} />;
+      )}
+    </div>
+  );
 }
