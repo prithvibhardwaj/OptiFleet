@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
+import GoogleMapComponent from './GoogleMapComponent';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -115,6 +116,38 @@ const optimizedRoutes = [
     locked: false,
   },
 ];
+
+// Approximate Singapore coordinates for demo stop addresses
+const stopCoords: Record<string, { lat: number; lng: number }> = {
+  '123 Clementi Ave 3': { lat: 1.3152, lng: 103.7649 },
+  '88 Commonwealth Crescent': { lat: 1.3026, lng: 103.7983 },
+  '456 Ang Mo Kio St 21': { lat: 1.3691, lng: 103.8454 },
+  '789 Bedok North Ave 1': { lat: 1.3326, lng: 103.9176 },
+  '234 Tampines St 21': { lat: 1.3496, lng: 103.9568 },
+  '11 Woodlands Close': { lat: 1.4382, lng: 103.7890 },
+  '890 Woodlands Ave 6': { lat: 1.4419, lng: 103.7865 },
+  '567 Yishun Ring Rd': { lat: 1.4304, lng: 103.8354 },
+  '321 Pasir Ris Dr 3': { lat: 1.3721, lng: 103.9474 },
+  '678 Bukit Batok West Ave 6': { lat: 1.3491, lng: 103.7495 },
+  '345 Hougang Ave 8': { lat: 1.3721, lng: 103.8930 },
+  '234 Marine Parade Rd': { lat: 1.3018, lng: 103.9063 },
+  '567 Serangoon North Ave 1': { lat: 1.3851, lng: 103.8721 },
+  '22 Upper Serangoon Rd': { lat: 1.3574, lng: 103.8727 },
+  '201 Tampines St 21': { lat: 1.3511, lng: 103.9481 },
+  '40 Pandan Loop': { lat: 1.3162, lng: 103.7418 },
+  '5 Toh Guan Rd East': { lat: 1.3348, lng: 103.7431 },
+  '30 Jurong Port Rd': { lat: 1.3041, lng: 103.7178 },
+  '70 Jurong West Ave 1': { lat: 1.3476, lng: 103.7041 },
+  '1 Fusionopolis Way': { lat: 1.2994, lng: 103.7871 },
+  '110 Toa Payoh Lorong 1': { lat: 1.3343, lng: 103.8474 },
+  '3 Hospital Dr': { lat: 1.2797, lng: 103.8352 },
+  '10 Anson Rd': { lat: 1.2756, lng: 103.8454 },
+  '6 Raffles Blvd': { lat: 1.2897, lng: 103.8597 },
+  '36 Kranji Loop': { lat: 1.4241, lng: 103.7412 },
+  '31 Tuas Ave 1': { lat: 1.3201, lng: 103.6381 },
+  '9 Changi North Way': { lat: 1.3681, lng: 103.9841 },
+  '50 Changi South Ave 1': { lat: 1.3341, lng: 103.9821 },
+};
 
 export default function RoutesPage() {
   const [routes, setRoutes] = useState(optimizedRoutes);
@@ -399,15 +432,21 @@ export default function RoutesPage() {
 
             <TabsContent value="map">
               <Card>
-                <CardContent className="p-8">
-                  <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-xl h-[600px] flex items-center justify-center border border-border">
-                    <div className="text-center">
-                      <MapPin className="w-16 h-16 text-blue-600 mx-auto mb-4" />
-                      <h3 className="mb-2">Interactive Route Map</h3>
-                      <p className="text-sm text-muted-foreground max-w-md">
-                        Visual representation of all optimized routes with color-coded paths for each vehicle
-                      </p>
-                    </div>
+                <CardContent className="p-0 overflow-hidden rounded-lg">
+                  <div className="h-[600px]">
+                    <GoogleMapComponent
+                      className="w-full h-full"
+                      center={{ lat: 1.3521, lng: 103.8198 }}
+                      zoom={12}
+                      markers={routes.flatMap(route =>
+                        route.stops.map((stop, idx) => ({
+                          id: `${route.vehicle}-${idx}`,
+                          position: stopCoords[stop.address] || { lat: 1.3521 + (idx * 0.01), lng: 103.8198 + (idx * 0.01) },
+                          title: `${stop.customer} — ETA ${stop.eta}`,
+                          color: stop.status === 'completed' ? '#22c55e' : stop.status === 'in-progress' ? '#3b82f6' : '#9ca3af',
+                        }))
+                      )}
+                    />
                   </div>
                 </CardContent>
               </Card>

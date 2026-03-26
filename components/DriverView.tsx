@@ -11,10 +11,18 @@ import {
   Clock,
   AlertTriangle,
   RefreshCw,
-  Map,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import GoogleMapComponent from './GoogleMapComponent';
 import { SidebarTrigger } from './ui/sidebar';
+
+const taskCoords: Record<string, { lat: number; lng: number }> = {
+  '123 Clementi Ave 3, #05-12, Singapore 129588': { lat: 1.3152, lng: 103.7649 },
+  '88 Commonwealth Crescent, #01-08, Singapore 149520': { lat: 1.3026, lng: 103.7983 },
+  '456 Ang Mo Kio St 21, Block 456, Singapore 560456': { lat: 1.3691, lng: 103.8454 },
+  '789 Bedok North Ave 1, #02-34, Singapore 460789': { lat: 1.3326, lng: 103.9176 },
+  '234 Tampines St 21, Singapore 520234': { lat: 1.3496, lng: 103.9568 },
+};
 
 const driverTasks = [
   {
@@ -241,13 +249,21 @@ export default function DriverView() {
 
         {/* Map Preview Card */}
         <Card>
-          <CardContent className="p-6">
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg h-48 flex items-center justify-center border border-border">
-              <div className="text-center">
-                <Map className="w-12 h-12 text-blue-600 mx-auto mb-3" />
-                <h4 className="mb-1">Route Overview</h4>
-                <p className="text-sm text-muted-foreground">Tap to view full route map</p>
-              </div>
+          <CardContent className="p-0 overflow-hidden rounded-lg">
+            <div className="h-48">
+              <GoogleMapComponent
+                className="w-full h-full"
+                center={{ lat: 1.3691, lng: 103.8454 }}
+                zoom={13}
+                markers={tasks
+                  .filter(t => t.status !== 'completed')
+                  .map((t, idx) => ({
+                    id: String(t.id),
+                    position: taskCoords[t.address] || { lat: 1.3521 + idx * 0.01, lng: 103.8198 + idx * 0.01 },
+                    title: t.customer,
+                    color: t.status === 'in-progress' ? '#3b82f6' : '#9ca3af',
+                  }))}
+              />
             </div>
           </CardContent>
         </Card>

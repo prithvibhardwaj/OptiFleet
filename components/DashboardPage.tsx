@@ -8,14 +8,12 @@ import {
   Zap,
   TrendingUp,
   Fuel,
-  Clock,
   Leaf,
   MapPin,
-  Navigation,
-  Circle,
   Loader2,
 } from 'lucide-react';
 import { SidebarTrigger } from './ui/sidebar';
+import GoogleMapComponent from './GoogleMapComponent';
 
 export default function DashboardPage() {
   const [vehicles, setVehicles] = useState<any[]>([]);
@@ -219,83 +217,18 @@ export default function DashboardPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl h-[500px] overflow-hidden border border-border">
-                {/* Simplified Singapore Map Background */}
-                <div className="absolute inset-0 opacity-20">
-                  <svg className="w-full h-full" viewBox="0 0 600 400">
-                    <path d="M50,200 Q150,150 250,180 T450,200" stroke="#94a3b8" strokeWidth="2" fill="none" />
-                    <path d="M100,100 L200,150 L300,120 L400,140" stroke="#94a3b8" strokeWidth="1.5" fill="none" />
-                    <path d="M80,250 Q180,280 280,260 T480,270" stroke="#94a3b8" strokeWidth="2" fill="none" />
-                    <circle cx="300" cy="200" r="80" stroke="#cbd5e1" strokeWidth="1" fill="none" opacity="0.5" />
-                  </svg>
-                </div>
-
-                {/* Vehicle Markers */}
-                {vehicles.map((vehicle, _idx) => (
-                  <div
-                    key={vehicle.id}
-                    className="absolute group cursor-pointer"
-                    style={{
-                      left: `${(vehicle.lng - 103.8) * 1000 + 150}px`,
-                      top: `${(1.36 - vehicle.lat) * 1000 + 150}px`,
-                    }}
-                  >
-                    <div className="relative">
-                      <div className={`w-8 h-8 ${getStatusColor(vehicle.status)} rounded-full flex items-center justify-center shadow-lg border-2 border-white transition-transform group-hover:scale-110`}>
-                        {vehicle.status === 'en-route' ? (
-                          <Navigation className="w-4 h-4 text-white" />
-                        ) : vehicle.status === 'idle' ? (
-                          <Circle className="w-4 h-4 text-white" />
-                        ) : (
-                          <Circle className="w-4 h-4 text-white fill-white" />
-                        )}
-                      </div>
-                      
-                      {/* Tooltip */}
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-10">
-                        <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-xl">
-                          <p className="font-medium">{vehicle.name}</p>
-                          <p className="text-gray-300">{vehicle.driver}</p>
-                          <p className="text-gray-300">{vehicle.stops} stops</p>
-                          <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-                        </div>
-                      </div>
-
-                      {/* Pulse animation for en-route */}
-                      {vehicle.status === 'en-route' && (
-                        <div className={`absolute inset-0 ${getStatusColor(vehicle.status)} rounded-full animate-ping opacity-75`}></div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-
-                {/* Legend */}
-                <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-3 space-y-2">
-                  <p className="text-xs mb-2 opacity-60">Status</p>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                    <span className="text-xs">En Route</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
-                    <span className="text-xs">Idle</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="text-xs">Completed</span>
-                  </div>
-                </div>
-
-                {/* Stats Overlay */}
-                <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-4 space-y-2">
-                  <div className="flex items-center gap-3">
-                    <Clock className="w-4 h-4 text-muted-foreground" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Avg. Hours Driven</p>
-                      <p className="text-lg">6.2h</p>
-                    </div>
-                  </div>
-                </div>
+              <div className="relative rounded-xl h-[500px] overflow-hidden border border-border">
+                <GoogleMapComponent
+                  className="w-full h-full"
+                  center={{ lat: 1.3521, lng: 103.8198 }}
+                  zoom={12}
+                  markers={vehicles.map(v => ({
+                    id: v.id,
+                    position: { lat: v.lat, lng: v.lng },
+                    title: `${v.name} — ${v.driver} (${v.status})`,
+                    color: v.status === 'en-route' ? '#3b82f6' : v.status === 'idle' ? '#f59e0b' : '#22c55e',
+                  }))}
+                />
               </div>
             </CardContent>
           </Card>

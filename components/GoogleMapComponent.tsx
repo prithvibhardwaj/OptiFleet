@@ -40,7 +40,7 @@ export default function GoogleMapComponent({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const GOOGLE_MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY'; // User needs to add this
+    const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
     // Check if Google Maps is already loaded
     if (window.google && window.google.maps) {
