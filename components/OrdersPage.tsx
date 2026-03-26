@@ -34,8 +34,7 @@ import {
   DialogTrigger,
 } from './ui/dialog';
 import { Textarea } from './ui/textarea';
-import { ordersApi } from '../utils/api';
-import { parseCSV, validateOrder, detectDuplicates, generateCSVTemplate, downloadCSV } from '../utils/csvParser';
+import { generateCSVTemplate, downloadCSV } from '../utils/csvParser';
 import { toast } from 'sonner';
 
 export default function OrdersPage() {
