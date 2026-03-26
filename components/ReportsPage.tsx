@@ -12,6 +12,9 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { SidebarTrigger } from './ui/sidebar';
+import { toast } from 'sonner';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 const esgMetrics = [
   { label: 'Total CO₂ Saved', value: '3,124 kg', change: '+31%', icon: Leaf, color: 'emerald' },
@@ -36,15 +39,208 @@ const certifications = [
   { name: 'EnterpriseSG Green Certification', status: 'eligible', description: 'Qualifies for government green business certification' },
 ];
 
+type ReportVariant = 'full' | 'enterprisesg' | 'nea';
+
+function buildPDF(variant: ReportVariant): jsPDF {
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+  const pageW = doc.internal.pageSize.getWidth();
+  const margin = 18;
+  let y = margin;
+
+  // ── Header bar ──
+  doc.setFillColor(22, 163, 74); // green-600
+  doc.rect(0, 0, pageW, 36, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(18);
+  doc.setFont('helvetica', 'bold');
+  doc.text('OptiFleet Solutions', margin, 14);
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'normal');
+
+  const titleMap: Record<ReportVariant, string> = {
+    full: 'Sustainability Impact Report — H2 2025 / Q1 2026',
+    enterprisesg: 'EnterpriseSG Green Business Report — H2 2025 / Q1 2026',
+    nea: 'NEA Environmental Compliance Report — H2 2025 / Q1 2026',
+  };
+  doc.text(titleMap[variant], margin, 22);
+  doc.text('Generated: 26 March 2026  |  Period: Sep 2025 – Mar 2026', margin, 30);
+
+  y = 46;
+  doc.setTextColor(30, 30, 30);
+
+  // ── Impact score badge (full & enterprisesg only) ──
+  if (variant !== 'nea') {
+    doc.setFillColor(220, 252, 231);
+    doc.roundedRect(pageW - margin - 38, 38, 38, 18, 3, 3, 'F');
+    doc.setTextColor(22, 101, 52);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Impact Score', pageW - margin - 37, 45);
+    doc.setFontSize(16);
+    doc.text('A+', pageW - margin - 26, 53);
+    doc.setTextColor(30, 30, 30);
+    y = 60;
+  }
+
+  // ── Section: Key Metrics ──
+  doc.setFontSize(13);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Key Environmental Metrics', margin, y);
+  y += 2;
+
+  autoTable(doc, {
+    startY: y,
+    head: [['Metric', 'Value', 'vs Prior Period']],
+    body: [
+      ['Total CO₂ Saved', '3,124 kg', '+31%'],
+      ['Distance Reduced', '847 km', '+27%'],
+      ['Fuel Saved', '594 L', '+29%'],
+      ['Trees Equivalent', '142 trees', '+31%'],
+    ],
+    headStyles: { fillColor: [22, 163, 74], textColor: 255, fontStyle: 'bold' },
+    alternateRowStyles: { fillColor: [240, 253, 244] },
+    margin: { left: margin, right: margin },
+    styles: { fontSize: 10 },
+  });
+
+  y = (doc as any).lastAutoTable.finalY + 10;
+
+  // ── Section: Monthly Breakdown ──
+  doc.setFontSize(13);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Monthly Environmental Breakdown', margin, y);
+  y += 2;
+
+  autoTable(doc, {
+    startY: y,
+    head: [['Month', 'CO₂ Saved (kg)', 'Distance Reduced (km)', 'Fuel Saved (L)', 'Status']],
+    body: monthlyData.map(d => [d.month, d.co2, d.distance, d.fuel, 'Verified']),
+    headStyles: { fillColor: [37, 99, 235], textColor: 255, fontStyle: 'bold' },
+    alternateRowStyles: { fillColor: [239, 246, 255] },
+    margin: { left: margin, right: margin },
+    styles: { fontSize: 10 },
+    columnStyles: { 4: { textColor: [22, 163, 74], fontStyle: 'bold' } },
+  });
+
+  y = (doc as any).lastAutoTable.finalY + 6;
+
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'bold');
+  doc.setFillColor(219, 234, 254);
+  doc.rect(margin, y, pageW - margin * 2, 9, 'F');
+  doc.setTextColor(30, 64, 175);
+  doc.text(
+    'Total: 3,124 kg CO₂ saved  •  847 km reduced  •  594 L fuel saved',
+    margin + 3,
+    y + 6,
+  );
+  doc.setTextColor(30, 30, 30);
+  y += 16;
+
+  // ── Section: Certifications (full & enterprisesg) ──
+  if (variant !== 'nea') {
+    if (y > 230) { doc.addPage(); y = margin; }
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Certifications & Compliance', margin, y);
+    y += 2;
+
+    autoTable(doc, {
+      startY: y,
+      head: [['Certification', 'Status', 'Description']],
+      body: certifications.map(c => [c.name, c.status === 'eligible' ? 'Eligible' : 'Contributing', c.description]),
+      headStyles: { fillColor: [22, 163, 74], textColor: 255, fontStyle: 'bold' },
+      alternateRowStyles: { fillColor: [240, 253, 244] },
+      margin: { left: margin, right: margin },
+      styles: { fontSize: 9 },
+      columnStyles: { 1: { fontStyle: 'bold', textColor: [22, 101, 52] } },
+    });
+
+    y = (doc as any).lastAutoTable.finalY + 10;
+  }
+
+  // ── Section: variant-specific narrative ──
+  if (y > 240) { doc.addPage(); y = margin; }
+
+  if (variant === 'enterprisesg') {
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    doc.text('EnterpriseSG Grant Compliance Summary', margin, y);
+    y += 7;
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    const lines = doc.splitTextToSize(
+      'OptiFleet Solutions demonstrates sustained reduction in carbon emissions and fuel consumption through AI-powered route optimisation. ' +
+      'The data in this report supports the Green Lane application under the Enterprise Development Grant (EDG) scheme. ' +
+      'All figures are system-generated, timestamped, and available for third-party audit.',
+      pageW - margin * 2,
+    );
+    doc.text(lines, margin, y);
+    y += lines.length * 5 + 6;
+  }
+
+  if (variant === 'nea') {
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    doc.text('NEA Compliance Declaration', margin, y);
+    y += 7;
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    const lines = doc.splitTextToSize(
+      'This report is prepared in accordance with the National Environment Agency (NEA) reporting guidelines for logistics operators. ' +
+      'Emissions savings are calculated using the IPCC Tier 1 methodology (2.68 kg CO₂ per litre of diesel). ' +
+      'OptiFleet Solutions commits to continuous improvement in line with the Singapore Green Plan 2030 targets.',
+      pageW - margin * 2,
+    );
+    doc.text(lines, margin, y);
+    y += lines.length * 5 + 6;
+  }
+
+  // ── Footer on every page ──
+  const pageCount = doc.getNumberOfPages();
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    doc.setFont('helvetica', 'normal');
+    doc.text(
+      `OptiFleet Solutions  •  Confidential  •  Generated 26 Mar 2026  •  Page ${i} of ${pageCount}`,
+      pageW / 2,
+      doc.internal.pageSize.getHeight() - 8,
+      { align: 'center' },
+    );
+  }
+
+  return doc;
+}
+
+const filenameMap: Record<ReportVariant, string> = {
+  full: 'OptiFleet_ESG_Report_H2_2025_Q1_2026.pdf',
+  enterprisesg: 'OptiFleet_EnterpriseSG_Report_H2_2025_Q1_2026.pdf',
+  nea: 'OptiFleet_NEA_Compliance_Report_H2_2025_Q1_2026.pdf',
+};
+
 export default function ReportsPage() {
   const getColorClasses = (color: string) => {
     const colors = {
-      emerald: { bg: 'bg-emerald-100', text: 'text-emerald-600', icon: 'bg-emerald-600' },
-      blue: { bg: 'bg-blue-100', text: 'text-blue-600', icon: 'bg-blue-600' },
-      amber: { bg: 'bg-amber-100', text: 'text-amber-600', icon: 'bg-amber-600' },
-      green: { bg: 'bg-green-100', text: 'text-green-600', icon: 'bg-green-600' },
+      emerald: { bg: 'bg-emerald-100', text: 'text-emerald-600' },
+      blue: { bg: 'bg-blue-100', text: 'text-blue-600' },
+      amber: { bg: 'bg-amber-100', text: 'text-amber-600' },
+      green: { bg: 'bg-green-100', text: 'text-green-600' },
     };
     return colors[color as keyof typeof colors] || colors.blue;
+  };
+
+  const handleDownload = (variant: ReportVariant) => {
+    toast.info('Generating PDF…');
+    try {
+      const doc = buildPDF(variant);
+      doc.save(filenameMap[variant]);
+      toast.success('Report downloaded successfully');
+    } catch (err) {
+      console.error(err);
+      toast.error('Failed to generate report');
+    }
   };
 
   return (
@@ -67,7 +263,7 @@ export default function ReportsPage() {
                 <Calendar className="w-4 h-4 mr-2" />
                 Select Period
               </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700">
+              <Button className="bg-blue-600 hover:bg-blue-700" onClick={() => handleDownload('full')}>
                 <Download className="w-4 h-4 mr-2" />
                 Download PDF Report
               </Button>
@@ -209,7 +405,7 @@ export default function ReportsPage() {
                     <div className="flex items-start justify-between mb-1">
                       <h4>{cert.name}</h4>
                       <Badge className={
-                        cert.status === 'eligible' 
+                        cert.status === 'eligible'
                           ? 'bg-green-100 text-green-700 hover:bg-green-100'
                           : 'bg-blue-100 text-blue-700 hover:bg-blue-100'
                       }>
@@ -235,7 +431,7 @@ export default function ReportsPage() {
               <p className="text-sm text-muted-foreground mb-4">
                 Complete sustainability report with all metrics and analysis
               </p>
-              <Button className="w-full bg-red-600 hover:bg-red-700">
+              <Button className="w-full bg-red-600 hover:bg-red-700" onClick={() => handleDownload('full')}>
                 <Download className="w-4 h-4 mr-2" />
                 Download PDF
               </Button>
@@ -251,7 +447,7 @@ export default function ReportsPage() {
               <p className="text-sm text-muted-foreground mb-4">
                 Report formatted for EnterpriseSG grant applications
               </p>
-              <Button className="w-full bg-green-600 hover:bg-green-700">
+              <Button className="w-full bg-green-600 hover:bg-green-700" onClick={() => handleDownload('enterprisesg')}>
                 <Download className="w-4 h-4 mr-2" />
                 Download PDF
               </Button>
@@ -267,7 +463,7 @@ export default function ReportsPage() {
               <p className="text-sm text-muted-foreground mb-4">
                 Environmental impact report for NEA compliance
               </p>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
+              <Button className="w-full bg-blue-600 hover:bg-blue-700" onClick={() => handleDownload('nea')}>
                 <Download className="w-4 h-4 mr-2" />
                 Download PDF
               </Button>
@@ -285,9 +481,9 @@ export default function ReportsPage() {
               <div>
                 <h4 className="mb-2 text-blue-900">About This Report</h4>
                 <p className="text-sm text-blue-700">
-                  This ESG report is automatically generated from real operational data collected by OptiFleet. 
-                  All metrics are verified and timestamped. The report includes CO₂ emissions saved through route 
-                  optimization, total distance reduced, and fuel consumption savings. This data is suitable for 
+                  This ESG report is automatically generated from real operational data collected by OptiFleet.
+                  All metrics are verified and timestamped. The report includes CO₂ emissions saved through route
+                  optimization, total distance reduced, and fuel consumption savings. This data is suitable for
                   submission to EnterpriseSG for green business certifications and NEA for environmental compliance.
                 </p>
               </div>
