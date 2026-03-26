@@ -1,0 +1,16 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Truck icon -->
+  <rect x="8" y="20" width="20" height="14" rx="2" fill="#3B82F6"/>
+  <rect x="28" y="26" width="14" height="8" rx="1" fill="#3B82F6"/>
+  <circle cx="16" cy="38" r="4" fill="#1E40AF"/>
+  <circle cx="34" cy="38" r="4" fill="#1E40AF"/>
+  <path d="M32 24 L38 28 L38 34 L32 34 Z" fill="#60A5FA"/>
+  
+  <!-- Route optimization lines -->
+  <path d="M 46 28 Q 52 22 58 28" stroke="#3B82F6" stroke-width="2" fill="none" stroke-dasharray="2,2"/>
+  
+  <!-- Text: OptiFleet -->
+  <text x="65" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="#1E293B">
+    OptiFleet
+  </text>
+</svg>
