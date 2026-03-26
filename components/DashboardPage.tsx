@@ -24,6 +24,20 @@ export default function DashboardPage() {
     loadData();
   }, []);
 
+  // Animate en-route vehicles every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVehicles(prev => prev.map(v => {
+        if (v.status !== 'en-route') return v;
+        // ~30 km/h → ~0.0083 deg/s lat → per 3s tick ≈ 0.000025 max nudge
+        const dlat = (Math.random() - 0.5) * 0.0008;
+        const dlng = (Math.random() - 0.5) * 0.0008;
+        return { ...v, lat: v.lat + dlat, lng: v.lng + dlng };
+      }));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   const loadData = async () => {
     setLoading(true);
     await new Promise(resolve => setTimeout(resolve, 800));
