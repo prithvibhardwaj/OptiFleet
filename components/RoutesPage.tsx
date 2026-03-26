@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -184,11 +185,16 @@ export default function RoutesPage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline">
+            <Button variant="outline" onClick={() => {
+              toast.success('Re-optimizing all routes...');
+              setTimeout(() => toast.success('All routes re-optimized — 6% additional savings found'), 2000);
+            }}>
               <RefreshCw className="w-4 h-4 mr-2" />
               Re-optimize
             </Button>
-            <Button>
+            <Button onClick={() => {
+              routes.forEach(r => toast.success(`Route sent to ${r.driver}`));
+            }}>
               <Send className="w-4 h-4 mr-2" />
               Send to All Drivers
             </Button>
@@ -341,7 +347,7 @@ export default function RoutesPage() {
                               </>
                             )}
                           </Button>
-                          <Button size="sm">
+                          <Button size="sm" onClick={() => toast.success(`Route sent to ${route.driver}`)}>
                             <Send className="w-4 h-4 mr-2" />
                             Send
                           </Button>

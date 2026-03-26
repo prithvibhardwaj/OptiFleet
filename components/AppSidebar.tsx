@@ -88,7 +88,10 @@ export default function AppSidebar({ currentPage, setCurrentPage }: AppSidebarPr
             Upgrade
           </button>
         </div>
-        <button className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground w-full px-2 py-1.5 rounded-lg hover:bg-sidebar-accent transition-colors">
+        <button
+          onClick={() => setCurrentPage('login')}
+          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground w-full px-2 py-1.5 rounded-lg hover:bg-sidebar-accent transition-colors"
+        >
           <LogOut className="w-4 h-4" />
           <span>Sign out</span>
         </button>

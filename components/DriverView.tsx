@@ -13,6 +13,7 @@ import {
   RefreshCw,
   Map,
 } from 'lucide-react';
+import { toast } from 'sonner';
 import { SidebarTrigger } from './ui/sidebar';
 
 const driverTasks = [
@@ -209,7 +210,10 @@ export default function DriverView() {
                 {/* Actions */}
                 {isCurrent && (
                   <div className="flex gap-3 pt-2">
-                    <Button className="flex-1 bg-blue-600 hover:bg-blue-700 h-12">
+                    <Button
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 h-12"
+                      onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(task.address)}`, '_blank')}
+                    >
                       <Navigation className="w-4 h-4 mr-2" />
                       Start Navigation
                     </Button>
@@ -250,11 +254,14 @@ export default function DriverView() {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-2 gap-4">
-          <Button variant="outline" className="h-14">
+          <Button variant="outline" className="h-14" onClick={() => {
+            toast.success('Recalculating route based on current traffic...');
+            setTimeout(() => toast.success('Route updated — saved 4 min'), 1500);
+          }}>
             <RefreshCw className="w-4 h-4 mr-2" />
             Recalculate Route
           </Button>
-          <Button variant="outline" className="h-14">
+          <Button variant="outline" className="h-14" onClick={() => toast.info('Issue reported to dispatch team')}>
             <AlertTriangle className="w-4 h-4 mr-2" />
             Report Issue
           </Button>

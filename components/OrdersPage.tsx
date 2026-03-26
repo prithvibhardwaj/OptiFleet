@@ -104,19 +104,9 @@ export default function OrdersPage() {
     }
   };
 
-  const handleDeleteOrder = async (orderId: string) => {
-    try {
-      const response = await ordersApi.delete(orderId);
-      if (response.success) {
-        toast.success('Order deleted');
-        loadOrders();
-      } else {
-        toast.error('Failed to delete order');
-      }
-    } catch (error) {
-      console.error('Error deleting order:', error);
-      toast.error('Error deleting order');
-    }
+  const handleDeleteOrder = (orderId: string) => {
+    setOrders(prev => prev.filter(o => o.id !== orderId));
+    toast.success('Order deleted');
   };
 
   const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {

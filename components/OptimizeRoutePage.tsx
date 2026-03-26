@@ -19,6 +19,7 @@ import {
   CheckCircle2,
   Calendar,
   Route,
+  Save,
 } from 'lucide-react';
 import { SidebarTrigger } from './ui/sidebar';
 import { toast } from 'sonner';
@@ -425,6 +426,21 @@ export default function OptimizeRoutePage() {
           {/* Route Insights - Only show after optimization */}
           {insights && (
             <>
+              {/* Save Route Banner */}
+              <div className="flex items-center justify-between p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div>
+                  <p className="font-medium text-green-900">Route optimized successfully</p>
+                  <p className="text-sm text-green-700">{insights.totalStops} stops · {insights.estimatedDistance} · {insights.estimatedDuration}</p>
+                </div>
+                <Button
+                  className="bg-green-600 hover:bg-green-700"
+                  onClick={() => toast.success('Route saved and ready to send to drivers')}
+                >
+                  <CheckCircle2 className="mr-2 h-4 w-4" />
+                  Save Route
+                </Button>
+              </div>
+
               {/* Key Metrics */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <Card>
