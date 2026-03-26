@@ -96,5 +96,11 @@
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.7"
+  },
+  "optionalDependencies": {
+    "@tailwindcss/oxide-linux-x64-gnu": "*",
+    "@tailwindcss/oxide-darwin-x64": "*",
+    "@tailwindcss/oxide-darwin-arm64": "*",
+    "@tailwindcss/oxide-win32-x64-msvc": "*"
   }
 }
