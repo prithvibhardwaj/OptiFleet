@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { SidebarTrigger } from './ui/sidebar';
 import { toast } from 'sonner';
+import GoogleMapComponent from './GoogleMapComponent';
 import {
   Select,
   SelectContent,
@@ -50,6 +51,7 @@ interface RouteInsights {
   vehiclesNeeded: number;
   totalStops: number;
   optimizedOrder: Location[];
+  routeCoords: Array<{ lat: number; lng: number }>;
   recommendations: string[];
   alternativeRoutes: {
     name: string;
@@ -226,6 +228,10 @@ export default function OptimizeRoutePage() {
       const altLocal = { km: totalKm * 0.91, min: totalMin * 1.20 };
       const altFast  = { km: totalKm * 1.11, min: totalMin * 0.87 };
 
+      // Build ordered coordinate path: depot → stops → depot
+      const orderedStopCoords = ordered.map(p => ({ lat: p.lat, lng: p.lng }));
+      const routeCoords = [startCoords, ...orderedStopCoords, endCoords];
+
       const result: RouteInsights = {
         bestTime: preferredTime ? preferredTime : '08:30',
         trafficScore: 'low',
@@ -236,6 +242,7 @@ export default function OptimizeRoutePage() {
         vehiclesNeeded: Math.max(1, Math.ceil(locations.length / 6)),
         totalStops: locations.length,
         optimizedOrder: optimizedLocations,
+        routeCoords,
         recommendations: [
           `Optimized stop order reduces total distance by an estimated 18–25% vs unordered`,
           locations.length > 6
@@ -552,6 +559,40 @@ export default function OptimizeRoutePage() {
                   Save Route
                 </Button>
               </div>
+
+              {/* Route Map */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <MapPin className="h-5 w-5" />
+                    Route Map
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-0 overflow-hidden rounded-b-lg">
+                  <div className="h-80">
+                    <GoogleMapComponent
+                      className="w-full h-full"
+                      markers={[
+                        // Depot start
+                        { id: 'depot-start', position: insights.routeCoords[0], title: `Depot: ${startLocation}`, color: '#374151' },
+                        // Optimized stops
+                        ...insights.optimizedOrder.map((loc, idx) => ({
+                          id: loc.id,
+                          position: insights.routeCoords[idx + 1],
+                          title: `${idx + 1}. ${loc.address}`,
+                          color: '#2563eb',
+                        })),
+                      ]}
+                      routes={[
+                        {
+                          path: insights.routeCoords,
+                          color: '#2563eb',
+                        },
+                      ]}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
 
               {/* Optimized Stop Order */}
               <Card>
