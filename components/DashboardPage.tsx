@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -15,26 +15,99 @@ import {
 import { SidebarTrigger } from './ui/sidebar';
 import GoogleMapComponent from './GoogleMapComponent';
 
+// Waypoints for each en-route vehicle — ordered remaining stops from RoutesPage
+const vehiclePaths: Record<string, Array<{ lat: number; lng: number }>> = {
+  // V001 John Lim: currently at AMK → Bedok → Tampines
+  V001: [
+    { lat: 1.3691, lng: 103.8454 },
+    { lat: 1.3326, lng: 103.9176 },
+    { lat: 1.3496, lng: 103.9568 },
+  ],
+  // V002 Sarah Tan: currently at Pasir Ris → Bukit Batok
+  V002: [
+    { lat: 1.3721, lng: 103.9474 },
+    { lat: 1.3491, lng: 103.7495 },
+  ],
+  // V004 Amy Wong: currently at Marine Parade → Serangoon North → Upper Serangoon → Tampines
+  V004: [
+    { lat: 1.3018, lng: 103.9063 },
+    { lat: 1.3851, lng: 103.8721 },
+    { lat: 1.3574, lng: 103.8727 },
+    { lat: 1.3511, lng: 103.9481 },
+  ],
+  // V006 Lisa Koh: currently at Jurong Port → Jurong West
+  V006: [
+    { lat: 1.3041, lng: 103.7178 },
+    { lat: 1.3476, lng: 103.7041 },
+  ],
+  // V008 Jane Sim: central Singapore patrol route
+  V008: [
+    { lat: 1.3821, lng: 103.8798 },
+    { lat: 1.3600, lng: 103.8700 },
+    { lat: 1.3400, lng: 103.8900 },
+    { lat: 1.3550, lng: 103.8500 },
+  ],
+  // V009 Kevin Tay: currently at Toa Payoh → Hospital Dr → Anson Rd → Raffles Blvd
+  V009: [
+    { lat: 1.3343, lng: 103.8474 },
+    { lat: 1.2797, lng: 103.8352 },
+    { lat: 1.2756, lng: 103.8454 },
+    { lat: 1.2897, lng: 103.8597 },
+  ],
+  // V011 Raymond Ong: currently at Changi North → Changi South
+  V011: [
+    { lat: 1.3681, lng: 103.9841 },
+    { lat: 1.3341, lng: 103.9821 },
+  ],
+};
+
 export default function DashboardPage() {
   const [vehicles, setVehicles] = useState<any[]>([]);
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  // Per-vehicle progress: segIdx = which segment, t = 0–1 progress along that segment
+  const progressRef = useRef<Record<string, { segIdx: number; t: number }>>({});
 
   useEffect(() => {
     loadData();
   }, []);
 
-  // Animate en-route vehicles every 3 seconds
+  // Animate en-route vehicles along their actual route waypoints every 3 seconds
   useEffect(() => {
+    // Initialise progress for every vehicle that has a path
+    Object.keys(vehiclePaths).forEach(id => {
+      if (!progressRef.current[id]) {
+        progressRef.current[id] = { segIdx: 0, t: 0 };
+      }
+    });
+
+    const STEP = 0.05; // fraction of one segment per tick (~20 ticks/segment)
+
     const interval = setInterval(() => {
       setVehicles(prev => prev.map(v => {
-        if (v.status !== 'en-route') return v;
-        // ~30 km/h → ~0.0083 deg/s lat → per 3s tick ≈ 0.000025 max nudge
-        const dlat = (Math.random() - 0.5) * 0.0008;
-        const dlng = (Math.random() - 0.5) * 0.0008;
-        return { ...v, lat: v.lat + dlat, lng: v.lng + dlng };
+        const path = vehiclePaths[v.id];
+        if (!path || v.status !== 'en-route') return v;
+
+        const prog = progressRef.current[v.id];
+        let { segIdx, t } = prog;
+
+        t += STEP;
+        if (t >= 1) {
+          t -= 1;
+          segIdx = Math.min(segIdx + 1, path.length - 2);
+        }
+        progressRef.current[v.id] = { segIdx, t };
+
+        const a = path[segIdx];
+        const b = path[Math.min(segIdx + 1, path.length - 1)];
+        return {
+          ...v,
+          lat: a.lat + (b.lat - a.lat) * t,
+          lng: a.lng + (b.lng - a.lng) * t,
+        };
       }));
     }, 3000);
+
     return () => clearInterval(interval);
   }, []);
 
