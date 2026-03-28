@@ -36,6 +36,7 @@ export default function GoogleMapComponent({
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
   const polylinesRef = useRef<any[]>([]);
+  const hasFitBoundsRef = useRef(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -164,13 +165,14 @@ export default function GoogleMapComponent({
       polylinesRef.current.push(polyline);
     });
 
-    // Fit bounds to show all markers
-    if (markers.length > 0) {
+    // Fit bounds only on first load — preserve user zoom/pan after that
+    if (markers.length > 0 && !hasFitBoundsRef.current) {
       const bounds = new window.google.maps.LatLngBounds();
       markers.forEach(marker => {
         bounds.extend(marker.position);
       });
       mapInstanceRef.current.fitBounds(bounds);
+      hasFitBoundsRef.current = true;
     }
   };
 
