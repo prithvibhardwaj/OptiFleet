@@ -101,7 +101,6 @@ Automated sustainability reporting for regulatory compliance.
 - **Sustainability Impact Report** — Full ESG report covering the H2 2025 – Q1 2026 period with an A+ impact score, top 5% in industry.
 - **Key ESG Metrics** — Total CO₂ saved (3,124 kg), distance reduced (847 km), fuel saved (594 L), and trees equivalent (142 trees), each with period-on-period improvement percentages.
 - **Monthly Breakdown Table** — Month-by-month CO₂, distance, and fuel figures from September 2025 to March 2026, each row marked Verified.
-- **Certifications Panel** — Eligibility status for ISO 14001, Singapore Green Plan 2030, and EnterpriseSG Green Certification.
 - **Three Downloadable PDF Reports** — Click to generate and download a real PDF instantly:
   - **Full ESG Report** — All metrics, monthly table, certifications, and impact score.
   - **EnterpriseSG Format** — Formatted for Enterprise Development Grant (EDG) green lane applications, including an EDG compliance narrative.

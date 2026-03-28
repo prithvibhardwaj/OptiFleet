@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Input } from './ui/input';
-import { TrendingUp, MapPin, Zap, ArrowRight, Leaf, Route, BarChart3, FileText, CheckCircle2 } from 'lucide-react';
+import { TrendingUp, MapPin, Zap, ArrowRight, Leaf, Route, BarChart3, FileText } from 'lucide-react';
 
 interface LoginPageProps { onLogin: () => void; onBack?: () => void; }
 
@@ -122,24 +122,6 @@ export default function LoginPage({ onLogin, onBack }: LoginPageProps) {
                 <p className="text-xs font-semibold text-white">Jason Lim</p>
                 <p className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>Operations Manager · Ace Pest Control Pte Ltd</p>
               </div>
-            </div>
-          </div>
-
-          {/* Compliance checklist */}
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.25)' }}>Compliance ready</p>
-            <div className="space-y-2">
-              {[
-                'ISO 14001 Environmental Management — Eligible',
-                'Singapore Green Plan 2030 — Contributing',
-                'EnterpriseSG EDG Green Lane — Eligible',
-                'NEA Emissions Reporting — IPCC Tier 1 Verified',
-              ].map(item => (
-                <div key={item} className="flex items-center gap-2">
-                  <CheckCircle2 size={13} style={{ color: '#00d4aa', flexShrink: 0 }} />
-                  <p className="text-xs" style={{ color: 'rgba(255,255,255,0.45)' }}>{item}</p>
-                </div>
-              ))}
             </div>
           </div>
 

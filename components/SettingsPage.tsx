@@ -241,9 +241,6 @@ export default function SettingsPage() {
                   </div>
                 ))}
               </div>
-              <div style={{ marginTop: '1.125rem', paddingTop: '1rem', borderTop: '1px solid var(--border-dim)', background: 'var(--blue-dim)', border: '1px solid rgba(59,158,255,0.2)', borderRadius: 'var(--r-md)', padding: '0.75rem' }}>
-                <p style={{ fontSize: '0.8125rem', color: 'var(--blue)' }}><strong>PDPA Compliance:</strong> OptiFleet is fully compliant with Singapore's Personal Data Protection Act (PDPA). All customer and driver data is encrypted and stored securely.</p>
-              </div>
             </>)}
           </TabsContent>
         </Tabs>
