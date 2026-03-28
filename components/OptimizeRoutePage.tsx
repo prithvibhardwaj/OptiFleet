@@ -19,6 +19,7 @@ import {
   CheckCircle2,
   Calendar,
   Route,
+  Flag,
 } from 'lucide-react';
 import { SidebarTrigger } from './ui/sidebar';
 import { toast } from 'sonner';
@@ -371,6 +372,29 @@ export default function OptimizeRoutePage() {
                       className="pl-10"
                     />
                   </div>
+                  {locations.some(l => l.address.trim()) && (
+                    <Select
+                      value=""
+                      onValueChange={(val) => {
+                        setStartLocation(val);
+                        toast.info('Start location updated');
+                      }}
+                    >
+                      <SelectTrigger className="text-xs h-8 text-muted-foreground">
+                        <SelectValue placeholder="Or pick a stop as start…" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="10 Tuas Ave 2, OptiFleet Depot">
+                          Depot — 10 Tuas Ave 2
+                        </SelectItem>
+                        {locations.filter(l => l.address.trim()).map((l, i) => (
+                          <SelectItem key={l.id} value={l.address}>
+                            Stop {String.fromCharCode(65 + i)} — {l.address}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="end-location">End Location</Label>
@@ -445,7 +469,11 @@ export default function OptimizeRoutePage() {
               {locations.map((location, index) => (
                 <div
                   key={location.id}
-                  className="flex items-start gap-3 p-4 border rounded-lg bg-background hover:bg-muted/50 transition-colors"
+                  className={`flex items-start gap-3 p-4 border rounded-lg transition-colors ${
+                    location.address && location.address === startLocation
+                      ? 'border-green-500 bg-green-50 dark:bg-green-950/20'
+                      : 'bg-background hover:bg-muted/50'
+                  }`}
                 >
                   <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-950/30 text-blue-600 shrink-0 mt-1">
                     {String.fromCharCode(65 + index)}
@@ -518,14 +546,36 @@ export default function OptimizeRoutePage() {
                     </div>
                   </div>
 
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => removeLocation(location.id)}
-                    className="shrink-0 text-muted-foreground hover:text-destructive"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
+                  <div className="flex flex-col gap-1 shrink-0">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      title="Set as start location"
+                      onClick={() => {
+                        if (!location.address.trim()) {
+                          toast.error('Enter an address first');
+                          return;
+                        }
+                        setStartLocation(location.address);
+                        toast.info(`Start set to: ${location.address}`);
+                      }}
+                      className={`h-8 w-8 ${
+                        location.address && location.address === startLocation
+                          ? 'text-green-600 bg-green-100 hover:bg-green-200'
+                          : 'text-muted-foreground hover:text-green-600'
+                      }`}
+                    >
+                      <Flag className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => removeLocation(location.id)}
+                      className="h-8 w-8 text-muted-foreground hover:text-destructive"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               ))}
 

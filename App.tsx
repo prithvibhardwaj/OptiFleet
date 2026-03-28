@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { SidebarProvider } from './components/ui/sidebar';
 import { Toaster } from './components/ui/sonner';
+import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 import DashboardPage from './components/DashboardPage';
 import OrdersPage from './components/OrdersPage';
@@ -14,10 +15,10 @@ import PricingPage from './components/PricingPage';
 import AppSidebar from './components/AppSidebar';
 import DataSeeder from './components/DataSeeder';
 
-export type PageType = 'login' | 'dashboard' | 'orders' | 'optimize' | 'routes' | 'driver' | 'analytics' | 'reports' | 'settings' | 'pricing';
+export type PageType = 'landing' | 'login' | 'dashboard' | 'orders' | 'optimize' | 'routes' | 'driver' | 'analytics' | 'reports' | 'settings' | 'pricing';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageType>('login');
+  const [currentPage, setCurrentPage] = useState<PageType>('landing');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
@@ -53,9 +54,17 @@ export default function App() {
   };
 
   if (!isLoggedIn) {
+    if (currentPage === 'login') {
+      return (
+        <>
+          <LoginPage onLogin={handleLogin} onBack={() => setCurrentPage('landing')} />
+          <Toaster />
+        </>
+      );
+    }
     return (
       <>
-        <LoginPage onLogin={handleLogin} />
+        <LandingPage onLogin={() => setCurrentPage('login')} />
         <Toaster />
       </>
     );
