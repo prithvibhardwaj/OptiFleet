@@ -95,11 +95,11 @@ function nearestNeighbor(
   return order;
 }
 
-// — Geocode a Singapore address using the Maps JS API
+// — Geocode a Jakarta address using the Maps JS API
 function geocodeAddress(address: string): Promise<{ lat: number; lng: number }> {
   return new Promise((resolve, reject) => {
     const geocoder = new window.google.maps.Geocoder();
-    geocoder.geocode({ address: `${address}, Singapore` }, (results: any, status: any) => {
+    geocoder.geocode({ address: `${address}, Jakarta, Indonesia` }, (results: any, status: any) => {
       if (status === 'OK' && results[0]) {
         const loc = results[0].geometry.location;
         resolve({ lat: loc.lat(), lng: loc.lng() });
@@ -132,14 +132,14 @@ function formatDuration(minutes: number): string {
 
 export default function OptimizeRoutePage() {
   const [locations, setLocations] = useState<Location[]>([
-    { id: '1', address: '234 Tampines St 21', type: 'pickup', notes: 'Construction materials return', timeWindow: '09:00 AM - 10:00 AM' },
-    { id: '2', address: '123 Clementi Ave 3', type: 'pickup', notes: 'Pest control equipment', timeWindow: '10:30 AM - 11:30 AM' },
-    { id: '3', address: '345 Hougang Ave 8', type: 'delivery', notes: 'Aircon parts delivery', timeWindow: '09:30 AM - 10:30 AM' },
-    { id: '4', address: '456 Ang Mo Kio St 21', type: 'delivery', notes: 'Cleaning supplies, 8kg', timeWindow: '13:30 PM - 14:30 PM' },
-    { id: '5', address: '789 Bedok North Ave 1', type: 'delivery', notes: 'Laundry chemicals', timeWindow: '11:00 AM - 12:00 PM' },
-    { id: '6', address: '567 Serangoon North Ave 1', type: 'service', notes: 'Catering drop-off, 22kg', timeWindow: '15:00 PM - 16:00 PM' },
+    { id: '1', address: 'Kawasan Berikat Cakung, Jakarta Timur', type: 'pickup', notes: 'Construction materials return', timeWindow: '09:00 AM - 10:00 AM' },
+    { id: '2', address: 'Jl. Daan Mogot No. 123, Cengkareng', type: 'pickup', notes: 'Pest control equipment', timeWindow: '10:30 AM - 11:30 AM' },
+    { id: '3', address: 'Jl. Boulevard Barat, Kelapa Gading', type: 'delivery', notes: 'Aircon parts delivery', timeWindow: '09:30 AM - 10:30 AM' },
+    { id: '4', address: 'Jl. Jend. Sudirman No. 45, Jakarta Pusat', type: 'delivery', notes: 'Cleaning supplies, 8kg', timeWindow: '13:30 PM - 14:30 PM' },
+    { id: '5', address: 'Jl. Bekasi Raya No. 200, Jatinegara', type: 'delivery', notes: 'Laundry chemicals', timeWindow: '11:00 AM - 12:00 PM' },
+    { id: '6', address: 'Jl. Rasuna Said No. 67, Kuningan', type: 'service', notes: 'Catering drop-off, 22kg', timeWindow: '15:00 PM - 16:00 PM' },
   ]);
-  const [startLocation, setStartLocation] = useState('10 Tuas Ave 2, OptiFleet Depot');
+  const [startLocation, setStartLocation] = useState('Kawasan Industri JIEP, Jl. Raya Bekasi KM 22, Jakarta Timur');
   const [endLocation, setEndLocation] = useState('10 Tuas Ave 2, OptiFleet Depot');
   const [preferredTime, setPreferredTime] = useState('08:30');
   const [avoidTolls, setAvoidTolls] = useState(false);
@@ -212,7 +212,7 @@ export default function OptimizeRoutePage() {
       const endCoords = endLocation.trim() ? await geocodeAddress(endLocation) : startCoords;
       totalKm += haversine(prev.lat, prev.lng, endCoords.lat, endCoords.lng);
 
-      // Metrics (Singapore city driving)
+      // Metrics (Jakarta city driving)
       const AVG_SPEED_KMH = 30;
       const SERVICE_MIN_PER_STOP = 12;
       const FUEL_L_PER_100KM = 10;

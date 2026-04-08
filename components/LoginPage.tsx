@@ -48,7 +48,7 @@ export default function LoginPage({ onLogin, onBack }: LoginPageProps) {
             <span className="text-white font-bold text-lg tracking-tight">OptiFleet</span>
             <span className="ml-2 text-xs font-semibold px-2 py-0.5 rounded-full"
               style={{ background: 'rgba(0,212,170,0.1)', color: '#00d4aa', border: '1px solid rgba(0,212,170,0.2)' }}>
-              Singapore
+              Jakarta
             </span>
           </div>
 
@@ -127,7 +127,7 @@ export default function LoginPage({ onLogin, onBack }: LoginPageProps) {
 
           {/* Footer note */}
           <p className="text-xs pb-4" style={{ color: 'rgba(255,255,255,0.18)' }}>
-            Trusted by pest control, logistics, catering, cleaning, and construction fleets across Singapore.
+            Trusted by pest control, logistics, catering, cleaning, and construction fleets across Jakarta.
           </p>
 
         </div>
@@ -210,7 +210,7 @@ export default function LoginPage({ onLogin, onBack }: LoginPageProps) {
           </div>
 
           <div className="mt-8 pt-6 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>opti-fleet.vercel.app · React 18 + TypeScript · Singapore</p>
+            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>opti-fleet.vercel.app · React 18 + TypeScript · Jakarta</p>
           </div>
         </div>
       </div>

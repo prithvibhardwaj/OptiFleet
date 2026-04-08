@@ -103,7 +103,7 @@ function buildPDF(variant: V) {
       head: [['Certification', 'Status', 'Notes']],
       body: [
         ['ISO 14001 Environmental Management', 'Eligible', 'Meets all criteria for environmental management certification'],
-        ['Singapore Green Plan 2030', 'Contributing', 'Actively reducing emissions in line with national targets'],
+        ['Indonesia Green Economy 2030', 'Contributing', 'Actively reducing emissions in line with national targets'],
         ['EnterpriseSG Green Certification', 'Eligible', 'Qualifies for EDG Green Lane'],
         ['NEA Carbon Reporting', 'Compliant', 'IPCC Tier 1 methodology applied'],
       ],
@@ -270,8 +270,8 @@ function buildPDF(variant: V) {
     y = (doc as any).lastAutoTable.finalY + 8;
 
     if (y > 230) { doc.addPage(); y = M; }
-    secTitle(doc, 'Singapore Green Plan 2030 Alignment', y, M); y += 6;
-    y = para(doc, 'OptiFleet Solutions is actively contributing to the Singapore Green Plan 2030 under the "Sustainable Living" and "Green Economy" pillars. The 27.8% Scope 1 CO₂ reduction achieved through AI-powered route optimisation directly supports the national logistics decarbonisation agenda. The company commits to annual emissions reporting and a further 15% reduction target for FY2027.', y, M, W);
+    secTitle(doc, 'Indonesia Green Economy 2030 Alignment', y, M); y += 6;
+    y = para(doc, 'OptiFleet Solutions is actively contributing to the Indonesia Green Economy 2030 under the "Sustainable Living" and "Green Economy" pillars. The 27.8% Scope 1 CO₂ reduction achieved through AI-powered route optimisation directly supports the national logistics decarbonisation agenda. The company commits to annual emissions reporting and a further 15% reduction target for FY2027.', y, M, W);
 
     y += 4; secTitle(doc, 'NEA Compliance Declaration', y, M); y += 6;
     y = para(doc, 'I, the undersigned, declare that the information in this Environmental Compliance Report is true and accurate. All figures have been derived using the IPCC Tier 1 methodology as specified in the NEA Environmental Reporting Guidelines for Logistics Operators. Supporting GPS and fuel consumption data is retained and available for inspection upon request by the National Environment Agency.', y, M, W);

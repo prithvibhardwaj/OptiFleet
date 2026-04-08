@@ -4,13 +4,13 @@ import { SidebarTrigger } from './ui/sidebar';
 import GoogleMapComponent from './GoogleMapComponent';
 
 const vehiclePaths: Record<string, Array<{ lat: number; lng: number }>> = {
-  V001: [{ lat: 1.3691, lng: 103.8454 }, { lat: 1.3326, lng: 103.9176 }, { lat: 1.3496, lng: 103.9568 }],
-  V002: [{ lat: 1.3721, lng: 103.9474 }, { lat: 1.3491, lng: 103.7495 }],
-  V004: [{ lat: 1.3018, lng: 103.9063 }, { lat: 1.3851, lng: 103.8721 }, { lat: 1.3574, lng: 103.8727 }, { lat: 1.3511, lng: 103.9481 }],
-  V006: [{ lat: 1.3041, lng: 103.7178 }, { lat: 1.3476, lng: 103.7041 }],
-  V008: [{ lat: 1.3821, lng: 103.8798 }, { lat: 1.3600, lng: 103.8700 }, { lat: 1.3400, lng: 103.8900 }, { lat: 1.3550, lng: 103.8500 }],
-  V009: [{ lat: 1.3343, lng: 103.8474 }, { lat: 1.2797, lng: 103.8352 }, { lat: 1.2756, lng: 103.8454 }, { lat: 1.2897, lng: 103.8597 }],
-  V011: [{ lat: 1.3681, lng: 103.9841 }, { lat: 1.3341, lng: 103.9821 }],
+  V001: [{ lat: -6.1963, lng: 106.8317 }, { lat: -6.1524, lng: 106.9040 }, { lat: -6.2153, lng: 106.8785 }, { lat: -6.1867, lng: 106.9004 }],
+  V002: [{ lat: -6.1397, lng: 106.8812 }, { lat: -6.1262, lng: 106.8020 }, { lat: -6.0783, lng: 106.9021 }, { lat: -6.1569, lng: 106.7272 }],
+  V004: [{ lat: -6.2913, lng: 106.7840 }, { lat: -6.2548, lng: 106.8197 }, { lat: -6.2297, lng: 106.8308 }, { lat: -6.2654, lng: 106.8826 }],
+  V006: [{ lat: -6.1400, lng: 106.7220 }, { lat: -6.1983, lng: 106.7524 }, { lat: -6.1989, lng: 106.7372 }, { lat: -6.1622, lng: 106.7894 }],
+  V008: [{ lat: -6.1742, lng: 106.8614 }, { lat: -6.1914, lng: 106.8428 }, { lat: -6.1944, lng: 106.8229 }, { lat: -6.1348, lng: 106.8131 }],
+  V009: [{ lat: -6.2241, lng: 106.8057 }, { lat: -6.1742, lng: 106.8614 }, { lat: -6.1914, lng: 106.8428 }, { lat: -6.1944, lng: 106.8229 }],
+  V011: [{ lat: -6.1867, lng: 106.9004 }, { lat: -6.1089, lng: 106.8807 }, { lat: -6.1267, lng: 106.9358 }, { lat: -6.0783, lng: 106.9021 }],
 };
 
 const statusCfg = {
@@ -49,18 +49,18 @@ export default function DashboardPage() {
     setLoading(true);
     await new Promise(r => setTimeout(r, 700));
     setVehicles([
-      { id: 'V001', plate: 'SBD 1234 A', type: 'Van', driver: 'John Lim', status: 'en-route', lat: 1.3521, lng: 103.8198 },
-      { id: 'V002', plate: 'SBD 5678 B', type: 'Van', driver: 'Sarah Tan', status: 'en-route', lat: 1.3321, lng: 103.8598 },
-      { id: 'V003', plate: 'SBD 9012 C', type: 'Truck', driver: 'Mike Chen', status: 'idle', lat: 1.3721, lng: 103.8898 },
-      { id: 'V004', plate: 'SBD 3456 D', type: 'Van', driver: 'Amy Wong', status: 'en-route', lat: 1.3121, lng: 103.8398 },
-      { id: 'V005', plate: 'SBD 7890 E', type: 'Van', driver: 'David Ng', status: 'done', lat: 1.3421, lng: 103.8698 },
-      { id: 'V006', plate: 'SBD 2345 F', type: 'Van', driver: 'Lisa Koh', status: 'en-route', lat: 1.3621, lng: 103.8298 },
-      { id: 'V007', plate: 'SBD 6789 G', type: 'Truck', driver: 'Tom Lee', status: 'done', lat: 1.3221, lng: 103.8498 },
-      { id: 'V008', plate: 'SBD 0123 H', type: 'Van', driver: 'Jane Sim', status: 'en-route', lat: 1.3821, lng: 103.8798 },
-      { id: 'V009', plate: 'SBD 4567 J', type: 'Van', driver: 'Kevin Tay', status: 'en-route', lat: 1.3281, lng: 103.8451 },
-      { id: 'V010', plate: 'SBD 8901 K', type: 'Truck', driver: 'Priya Nair', status: 'idle', lat: 1.3651, lng: 103.8751 },
-      { id: 'V011', plate: 'SBD 2468 L', type: 'Van', driver: 'Raymond Ong', status: 'en-route', lat: 1.3411, lng: 103.8211 },
-      { id: 'V012', plate: 'SBD 1357 M', type: 'Van', driver: 'Mei Lin', status: 'done', lat: 1.3561, lng: 103.8631 },
+      { id: 'V001', plate: 'B 1234 BDS', type: 'Van', driver: 'Budi Santoso', status: 'en-route', lat: -6.2241, lng: 106.8057 },
+      { id: 'V002', plate: 'B 5678 STR', type: 'Van', driver: 'Siti Rahayu', status: 'en-route', lat: -6.1321, lng: 106.8598 },
+      { id: 'V003', plate: 'B 9012 AFC', type: 'Truck', driver: 'Ahmad Fauzi', status: 'idle', lat: -6.1721, lng: 106.8898 },
+      { id: 'V004', plate: 'B 3456 DKS', type: 'Van', driver: 'Dewi Kusuma', status: 'en-route', lat: -6.2913, lng: 106.7840 },
+      { id: 'V005', plate: 'B 7890 RPT', type: 'Van', driver: 'Rizki Pratama', status: 'done', lat: -6.2421, lng: 106.8698 },
+      { id: 'V006', plate: 'B 2345 FTH', type: 'Van', driver: 'Fitri Handayani', status: 'en-route', lat: -6.1621, lng: 106.7298 },
+      { id: 'V007', plate: 'B 6789 EKW', type: 'Truck', driver: 'Eko Widodo', status: 'done', lat: -6.2221, lng: 106.8498 },
+      { id: 'V008', plate: 'B 0123 RNW', type: 'Van', driver: 'Rina Wulandari', status: 'en-route', lat: -6.1821, lng: 106.8798 },
+      { id: 'V009', plate: 'B 4567 HDS', type: 'Van', driver: 'Hendri Susanto', status: 'en-route', lat: -6.2281, lng: 106.8451 },
+      { id: 'V010', plate: 'B 8901 PKS', type: 'Truck', driver: 'Priyanka Sharma', status: 'idle', lat: -6.1651, lng: 106.8751 },
+      { id: 'V011', plate: 'B 2468 HGN', type: 'Van', driver: 'Hendra Gunawan', status: 'en-route', lat: -6.1411, lng: 106.9211 },
+      { id: 'V012', plate: 'B 1357 MYS', type: 'Van', driver: 'Maya Sari', status: 'done', lat: -6.2561, lng: 106.8631 },
     ]);
     setOrders(Array.from({ length: 22 }, (_, i) => ({ id: `ORD-${String(i + 1).padStart(3, '0')}`, status: i < 14 ? 'assigned' : 'pending' })));
     setLoading(false);
@@ -93,7 +93,7 @@ export default function DashboardPage() {
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <span className="badge badge--muted"><MapPin size={10} /> Singapore</span>
+          <span className="badge badge--muted"><MapPin size={10} /> Jakarta</span>
           <button className="btn btn-secondary" onClick={loadData} style={{ padding: '0.375rem 0.75rem' }}>
             <RefreshCw size={13} className={loading ? 'spin' : ''} />{loading ? 'Syncing…' : 'Refresh'}
           </button>
@@ -165,7 +165,7 @@ export default function DashboardPage() {
                 <span className="mono" style={{ fontSize: '0.6875rem', color: 'var(--tx-lo)' }}>Updates every 3s</span>
               </div>
               <div style={{ height: 440 }}>
-                <GoogleMapComponent className="w-full h-full" center={{ lat: 1.3521, lng: 103.8198 }} zoom={12}
+                <GoogleMapComponent className="w-full h-full" center={{ lat: -6.2088, lng: 106.8456 }} zoom={11}
                   markers={vehicles.map(v => ({ id: v.id, position: { lat: v.lat, lng: v.lng }, title: `${v.id} — ${v.driver}`, color: v.status === 'en-route' ? '#3b9eff' : v.status === 'idle' ? '#f59e0b' : '#22d47a' }))} />
               </div>
             </div>

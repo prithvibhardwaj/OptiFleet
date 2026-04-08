@@ -295,7 +295,7 @@ export default function LandingPage({ onLogin }: LandingPageProps) {
               <span className="font-bold text-base tracking-tight text-white">OptiFleet</span>
             </div>
             <div className="flex items-center gap-3">
-              <span className="hidden md:block text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>Fleet optimization for Singapore SMEs</span>
+              <span className="hidden md:block text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>Fleet optimization for Jakarta SMEs</span>
               <button onClick={onLogin} className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all hover:opacity-90" style={{ background: 'linear-gradient(135deg,#00d4aa,#00b894)', color: '#0d1117' }}>
                 Sign in <ArrowRight size={14} />
               </button>
@@ -310,7 +310,7 @@ export default function LandingPage({ onLogin }: LandingPageProps) {
             <div className="relative z-10 max-w-4xl mx-auto">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-8 text-xs font-semibold" style={{ background: 'rgba(0,212,170,0.1)', border: '1px solid rgba(0,212,170,0.25)', color: '#00d4aa' }}>
                 <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-                Built for Singapore logistics
+                Built for Jakarta logistics
               </div>
 
               <h1 className="text-6xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
@@ -390,7 +390,7 @@ export default function LandingPage({ onLogin }: LandingPageProps) {
               <Reveal>
                 <div className="text-center mb-16">
                   <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: '#3b9eff' }}>Customer stories</p>
-                  <h2 className="text-4xl font-bold tracking-tight text-white mb-4">Fleets across Singapore trust OptiFleet</h2>
+                  <h2 className="text-4xl font-bold tracking-tight text-white mb-4">Fleets across Jakarta trust OptiFleet</h2>
                   <p className="text-base max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.38)' }}>From pest control to healthcare logistics.</p>
                 </div>
               </Reveal>
@@ -451,7 +451,7 @@ export default function LandingPage({ onLogin }: LandingPageProps) {
               </div>
               <span className="text-sm font-semibold text-white">OptiFleet</span>
             </div>
-            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>opti-fleet.vercel.app · React 18 + TypeScript · Singapore</p>
+            <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>opti-fleet.vercel.app · React 18 + TypeScript · Jakarta</p>
             <button onClick={onLogin} className="text-xs font-medium" style={{ color: '#00d4aa', background: 'none', border: 'none', cursor: 'pointer' }}>Sign in →</button>
           </footer>
 

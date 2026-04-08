@@ -26,7 +26,7 @@ declare global {
 }
 
 export default function GoogleMapComponent({
-  center = { lat: 1.3521, lng: 103.8198 }, // Singapore center
+  center = { lat: -6.2088, lng: 106.8456 }, // Jakarta center
   zoom = 12,
   markers = [],
   routes = [],

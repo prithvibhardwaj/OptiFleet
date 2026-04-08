@@ -6,19 +6,19 @@ import { SidebarTrigger } from './ui/sidebar';
 import { Progress } from './ui/progress';
 
 const taskCoords: Record<string, { lat: number; lng: number }> = {
-  '123 Clementi Ave 3, #05-12, Singapore 129588': { lat: 1.3152, lng: 103.7649 },
-  '88 Commonwealth Crescent, #01-08, Singapore 149520': { lat: 1.3026, lng: 103.7983 },
-  '456 Ang Mo Kio St 21, Block 456, Singapore 560456': { lat: 1.3691, lng: 103.8454 },
-  '789 Bedok North Ave 1, #02-34, Singapore 460789': { lat: 1.3326, lng: 103.9176 },
-  '234 Tampines St 21, Singapore 520234': { lat: 1.3496, lng: 103.9568 },
+  'Jl. Kebon Sirih No. 12, Menteng, Jakarta Pusat 10340': { lat: -6.1963, lng: 106.8317 },
+  'Jl. Hayam Wuruk No. 88, Glodok, Jakarta Barat 11180': { lat: -6.1480, lng: 106.8158 },
+  'Jl. Kelapa Gading Raya No. 45, Jakarta Utara 14240': { lat: -6.1524, lng: 106.9040 },
+  'Jl. Bekasi Raya No. 234, Jatinegara, Jakarta Timur 13310': { lat: -6.2153, lng: 106.8785 },
+  'Kawasan Industri Pulo Gadung No. 56, Jakarta Timur 13930': { lat: -6.1867, lng: 106.9004 },
 };
 
 const tasks = [
-  { id: 1, customer: 'Ace Pest Control HQ', address: '123 Clementi Ave 3, #05-12, Singapore 129588', contact: '+65 9123 4567', eta: '09:15', status: 'completed', notes: 'Equipment delivery — signed by Mr. Tan at reception', completedAt: '09:10' },
-  { id: 2, customer: 'SwiftClean Solutions', address: '88 Commonwealth Crescent, #01-08, Singapore 149520', contact: '+65 9871 2345', eta: '10:05', status: 'completed', notes: 'Cleaning supplies pickup — 9kg, collect signed DO', completedAt: '09:58' },
-  { id: 3, customer: 'Clean Pro Services', address: '456 Ang Mo Kio St 21, Block 456, Singapore 560456', contact: '+65 9234 5678', eta: '11:10', status: 'in-progress', notes: 'Laundry chemicals delivery — 8kg. Ask for Ms. Rachel at loading bay.', distance: '3.1 km' },
-  { id: 4, customer: 'Fresh Laundry Co', address: '789 Bedok North Ave 1, #02-34, Singapore 460789', contact: '+65 9345 6789', eta: '12:25', status: 'pending', notes: 'Bulk laundry bags — 15kg. Call 10 min before arrival.', distance: '6.4 km' },
-  { id: 5, customer: 'BuildMaster Supplies', address: '234 Tampines St 21, Singapore 520234', contact: '+65 9456 7890', eta: '13:40', status: 'pending', notes: 'Heavy materials — use loading ramp at back.', distance: '9.2 km' },
+  { id: 1, customer: 'PT Basmi Hama Utama', address: 'Jl. Kebon Sirih No. 12, Menteng, Jakarta Pusat 10340', contact: '+62 812 3456 7890', eta: '09:15', status: 'completed', notes: 'Equipment delivery — signed by Pak Santoso at reception', completedAt: '09:10' },
+  { id: 2, customer: 'CV Bersih Cepat', address: 'Jl. Hayam Wuruk No. 88, Glodok, Jakarta Barat 11180', contact: '+62 821 8712 3456', eta: '10:05', status: 'completed', notes: 'Cleaning supplies pickup — 9kg, collect signed surat jalan', completedAt: '09:58' },
+  { id: 3, customer: 'PT Pro Kebersihan', address: 'Jl. Kelapa Gading Raya No. 45, Jakarta Utara 14240', contact: '+62 813 2345 6789', eta: '11:10', status: 'in-progress', notes: 'Laundry chemicals delivery — 8kg. Hubungi Bu Rini di loading bay.', distance: '3.1 km' },
+  { id: 4, customer: 'Laundri Segar', address: 'Jl. Bekasi Raya No. 234, Jatinegara, Jakarta Timur 13310', contact: '+62 815 3456 7891', eta: '12:25', status: 'pending', notes: 'Bulk laundry bags — 15kg. Telepon 10 menit sebelum tiba.', distance: '6.4 km' },
+  { id: 5, customer: 'CV Bangun Mandiri', address: 'Kawasan Industri Pulo Gadung No. 56, Jakarta Timur 13930', contact: '+62 817 4567 8902', eta: '13:40', status: 'pending', notes: 'Heavy materials — gunakan loading ramp di belakang.', distance: '9.2 km' },
 ];
 
 export default function DriverView() {
@@ -139,9 +139,9 @@ export default function DriverView() {
         <div className="surface">
           <div className="surface-hd"><MapPin size={13} style={{ color: 'var(--teal)' }} /><span className="surface-title">Remaining Stops</span></div>
           <div style={{ height: 200 }}>
-            <GoogleMapComponent className="w-full h-full" center={{ lat: 1.3691, lng: 103.8454 }} zoom={13}
+            <GoogleMapComponent className="w-full h-full" center={{ lat: -6.1963, lng: 106.8456 }} zoom={12}
               markers={localTasks.filter(t => t.status !== 'completed').map((t, i) => ({
-                id: String(t.id), position: taskCoords[t.address] || { lat: 1.3521 + i * 0.01, lng: 103.8198 + i * 0.01 },
+                id: String(t.id), position: taskCoords[t.address] || { lat: -6.2088 + i * 0.01, lng: 106.8456 + i * 0.01 },
                 title: t.customer, color: t.status === 'in-progress' ? '#3b9eff' : '#4a5666',
               }))} />
           </div>

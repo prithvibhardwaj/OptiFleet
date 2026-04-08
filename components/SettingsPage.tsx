@@ -64,7 +64,7 @@ export default function SettingsPage() {
   const [showAddDriver, setShowAddDriver] = useState(false);
   const [newVehicle, setNewVehicle] = useState({ id: '', plate: '', type: 'Van' });
   const [newDriver, setNewDriver] = useState({ name: '', email: '', phone: '' });
-  const [company, setCompany] = useState({ name: 'OptiFleet Solutions', reg: '202312345A', address: '123 Innovation Drive, #05-12, Singapore 138632', email: 'contact@optifleet.sg', phone: '+65 6789 0123', industry: 'Logistics & Fleet Management' });
+  const [company, setCompany] = useState({ name: 'OptiFleet Solutions', reg: '202312345A', address: 'Kawasan Industri JIEP, Jl. Raya Bekasi KM 22, Jakarta Timur 13930', email: 'contact@optifleet.id', phone: '+62 21 4567 8901', industry: 'Logistics & Fleet Management' });
   const [security, setSecurity] = useState({ twoFactor: false, locationTracking: true, exportEncryption: true, dataAnonymization: false });
 
   const statusBadge = (s: string) => s === 'active' ? <span className="badge badge--green">Active</span> : <span className="badge badge--muted">Inactive</span>;
